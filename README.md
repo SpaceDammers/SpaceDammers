@@ -1,2 +1,2 @@
 # SpaceDammers
-SpaceDammers is een dambord gemaakt met WebSockets
+SpaceDammers is een dambord gemaakt met WebSockets.
