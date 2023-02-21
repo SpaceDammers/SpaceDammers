@@ -17,5 +17,5 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
-@import "@/components/TestComponent/TestComponent.scss";
+@import "@/components/organisms/TestComponent/TestComponent.scss";
 </style>
