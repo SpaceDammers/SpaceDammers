@@ -3,3 +3,12 @@
 h1 {
     color: $white;
 }
+
+.button {
+    width: 182px;
+    height: 53px;
+    color: $white;
+    background: rgba(237, 19, 92, 0.292);
+    border: 4px dashed #ED135D;
+    border-radius: 1080px;
+}

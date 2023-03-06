@@ -19,6 +19,11 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <RouterView />
+  
+  <div class="background">
+    <div class="stars" />
+    <div class="twinkling" />
+  </div>
 </template>
 
 <style scoped>
