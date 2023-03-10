@@ -1,10 +1,10 @@
 import path from "path";
-import { defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import sass from 'sass'
+import { defineConfig, loadEnv } from "vite"
+import vue from "@vitejs/plugin-vue"
+import sass from "sass"
 
 // Get the VITE_PORT from the dotenv file
-const env = loadEnv('development', process.cwd())
+const env = loadEnv("development", process.cwd());
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,8 +27,11 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        implementation: sass
-      }
-    }
+        implementation: sass,
+      },
+    },
+  },
+  build: {
+    outDir: './html' 
   }
-})
+});
