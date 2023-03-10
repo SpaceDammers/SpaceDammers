@@ -23,8 +23,10 @@ export default defineComponent({
   <p>This is p</p>
   <a href="#">This is link</a><br/>
   <button class="button">This is button</button><br />
-  <div class="landstede-rose"></div>
-  <div class="orange"></div>
+  <div class="flex">
+    <div class="landstede-rose"></div>
+    <div class="orange"></div>
+  </div>
   <hr>
   
 </template>
