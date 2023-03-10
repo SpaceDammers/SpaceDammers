@@ -8,7 +8,6 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -20,10 +19,10 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <RouterView />
   
-  <div class="background">
+  <!-- <div class="background">
     <div class="stars" />
     <div class="twinkling" />
-  </div>
+  </div> -->
 </template>
 
 <style scoped>
