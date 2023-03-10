@@ -20,10 +20,10 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <RouterView />
   
-  <div class="background">
+  <!-- <div class="background">
     <div class="stars" />
     <div class="twinkling" />
-  </div>
+  </div> -->
 </template>
 
 <style scoped>
