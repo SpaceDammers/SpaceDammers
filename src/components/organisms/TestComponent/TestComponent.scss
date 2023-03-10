@@ -1,4 +1,4 @@
-@import '@assets/scss/variables.scss';
+@import "@assets/scss/variables.scss";
 
 h1 {
     color: $white;
@@ -9,6 +9,23 @@ h1 {
     height: 53px;
     color: $white;
     background: rgba(237, 19, 92, 0.292);
-    border: 4px dashed #ED135D;
+    border: 4px dashed #ed135d;
     border-radius: 1080px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+
+    .landstede-rose {
+        height: 100px;
+        width: 100px;
+        background: $landstede-rose;
+    }
+
+    .orange {
+        height: 100px;
+        width: 100px;
+        background: $orange;
+    }
 }
