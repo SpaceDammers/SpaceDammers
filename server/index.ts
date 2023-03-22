@@ -15,13 +15,24 @@ const io = new Server(httpServer, {
     },
 });
 
-// server-side
 io.on("connection", (socket) => {
-    console.log(socket.id);
+    console.log("Socket.io user with id:", socket.id, "connected");
+
+    socket.on("disconnect", () => {
+        console.log("Socket.io user with id:", socket.id, "disconnected");
+    });
+});
+
+io.on("connection", function (socket) {
+    socket.on("join", function (roomName: string) {
+        socket.join(roomName.toLowerCase());
+        socket.emit("joined", roomName.toLowerCase());
+        console.log("Socket.io user with id:", socket.id, "joined room:", roomName);
+    });
 });
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Express + TypeScript Server");
+    res.status(200);
 });
 
 httpServer.listen(port);
