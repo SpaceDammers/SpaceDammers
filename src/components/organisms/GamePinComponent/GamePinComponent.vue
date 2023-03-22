@@ -1,16 +1,36 @@
 <script lang="ts">
 import ButtonComponent from "@/components/atoms/ButtonComponent/button.vue";
 import InputComponent from "@/components/atoms/InputComponent/Input.vue";
+import SocketioService from "@/services/socketio.service";
 
 export default {
   name: "GamePinComponent",
   components: {
     ButtonComponent,
     InputComponent,
-  }
+  },
+  data() {
+    return {
+      pin: null,
+      error: null,
+    };
+  },
+  methods: {
+    sendPin() {
+      this.error = null;
+      if (this.pin === null) {
+        this.error = "Please enter a pin";
+        return;
+      } else if (this.pin.length !== 4) {
+        this.error = "Please enter a 4 digit pin";
+        return;
+      } else {
+        this.error = null;
+        new SocketioService().joinRoom(this.pin);
+      }
+    },
+  },
 };
-
-// log the gamepin when it changes
 </script>
 
 <template>
