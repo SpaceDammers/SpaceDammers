@@ -36,15 +36,20 @@ export default {
 <template>
   <div class="begin-game">
     <h1 class="title">SPACEDAMMERS</h1>
+    <div v-if="error">Error: {{ error }}</div>
     <div class="game-pin">
       <h1 class="title">Enter Game Pin</h1>
       <div class="start">
         <InputComponent
           :placeholder="'_ _ _ _'"
           :class="'game-pin-input'"
+          :orange="true"
           :max-characters="4"
+          :min-characters="4"
+          v-model="pin"
+          @keydown.enter="sendPin"
         />
-        <ButtonComponent :text="'Start game'" />
+        <ButtonComponent :text="'Start game'" @click="sendPin" />
       </div>
     </div>
   </div>
