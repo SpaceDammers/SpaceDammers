@@ -3,17 +3,19 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <script lang="ts">
-import { io } from "socket.io-client";
+import SocketioService from "./services/socketio.service";
 
-const socket = io("http://localhost:4000");
+const socket = new SocketioService(
+  "http://localhost:4000"
+).setupSocketConnection();
 
 // client-side
 socket.on("connect", () => {
-  console.log(socket.id);
+  console.log("Socket.io user with id:", socket.id, "connected");
 });
 
 socket.on("disconnect", () => {
-  console.log(socket.id);
+  console.log("Socket.io user disconnected");
 });
 
 export default {
