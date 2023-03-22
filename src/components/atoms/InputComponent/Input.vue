@@ -18,6 +18,15 @@ export default {
       type: Number,
       default: -1,
     },
+    minCharacters: {
+      type: Number,
+      default: -1,
+    },
+  },
+  data() {
+    return {
+      value: null,
+    };
   },
 };
 </script>
@@ -29,6 +38,8 @@ export default {
     :class="{ orange: orange, disabled: disabled }"
     :placeholder="placeholder"
     :maxlength="maxCharacters"
+    :minlength="minCharacters"
+    v-model="value"
   />
 </template>
 
