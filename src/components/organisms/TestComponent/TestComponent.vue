@@ -1,7 +1,10 @@
 <script lang="ts">
+import ButtonComponent from "@/components/atoms/ButtonComponent/button.vue";
+import InputComponent from "@/components/atoms/InputComponent/Input.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  components: { ButtonComponent, InputComponent },
   setup() {
     const message = "This is a test component";
 
@@ -21,14 +24,14 @@ export default defineComponent({
   <h5>This is h5</h5>
   <h6>This is h6</h6>
   <p>This is p</p>
-  <a href="#">This is link</a><br/>
-  <button class="button">This is button</button><br />
+  <a href="#">This is link</a><br />
+  <ButtonComponent /><br />
+  <InputComponent /><br />
   <div class="flex">
     <div class="landstede-rose"></div>
     <div class="orange"></div>
   </div>
-  <hr>
-  
+  <hr />
 </template>
 
 <style lang="scss">

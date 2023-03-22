@@ -1,0 +1,67 @@
+.begin-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+        font-family: Voyager;
+        font-size: 71px;
+        font-weight: 400;
+        line-height: 82px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: $white;
+    }
+
+    .game-pin {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+            font-family: Voyager;
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 30px;
+            letter-spacing: 0em;
+            text-align: center;
+            color: $landstede-rose;
+        }
+
+        .start {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 35px;
+            width: 100%;
+
+            .game-pin-input {
+                width: 427px;
+                text-align: center;
+                font-size: 24px; // adjust the font size as needed
+                // border: none;
+                // outline: none;
+                // background-color: $white;
+                color: $landstede-rose;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                letter-spacing: 2em;
+
+                &::placeholder {
+                    color: $landstede-rose;
+                    text-align: center;
+                    text-indent: 2em;
+                    letter-spacing: 2em; // adjust the spacing as needed
+                    font-weight: 700;
+                }
+            }
+
+            .button {
+                width: 321px;
+            }
+        }
+    }
+}
