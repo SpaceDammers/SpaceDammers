@@ -1,34 +1,58 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView } from "vue-router";
+</script>
+
+<script lang="ts">
+import SocketioService from "./services/socketio.service";
+
+const socket = new SocketioService().setupSocketConnection();
+
+// client-side
+socket.on("connect", () => {
+  console.log("Socket.io user with id:", socket.id, "connected");
+});
+
+socket.on("disconnect", () => {
+  console.log("Socket.io user disconnected");
+});
+
+export default {
+  name: "App",
+  components: {},
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/test">Test</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-  
-  <!-- <div class="background">
-    <div class="stars" />
-    <div class="twinkling" />
-  </div> -->
+  <div class="background">
+    <header>
+      <div class="wrapper">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/test">Test</RouterLink>
+          <RouterLink to="/start">Start Screen</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+.background {
+  background-image: url("@/assets/svg/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
+  width: 100%;
 }
 
 .logo {
@@ -37,10 +61,14 @@ header {
 }
 
 nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 
 nav a.router-link-exact-active {
