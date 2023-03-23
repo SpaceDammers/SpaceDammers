@@ -20,12 +20,22 @@ export default class SocketioService {
   }
 
   joinRoom(roomPin) {
-    // this.io.emit("join", roomPin);
-    this.socket.emit("join", roomPin);
-    console.log(`Joining room ${roomPin}...`);
-    // Check if joined successfully
-    this.socket.on("joined", (roomPin) => {
-      console.log(`Joined room ${roomPin}`);
+    return new Promise((resolve) => {
+      // Try to join room
+      this.socket.emit("join", roomPin);
+      console.log(`Joining room ${roomPin}...`);
+
+      // If joined successfully
+      this.socket.on("joined", (roomPin) => {
+        console.log(`Joined room ${roomPin}`);
+        resolve(true);
+      });
+
+      // If room is full
+      this.socket.on("full", (roomPin) => {
+        console.log(`Room ${roomPin} is full`);
+        resolve(false);
+      });
     });
   }
 
