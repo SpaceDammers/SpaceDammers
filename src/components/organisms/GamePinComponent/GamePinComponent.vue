@@ -13,10 +13,11 @@ export default {
     return {
       pin: null,
       error: null,
+      success: null,
     };
   },
   methods: {
-    sendPin() {
+    async sendPin() {
       this.error = null;
       if (this.pin === null) {
         this.error = "Please enter a pin";
@@ -24,9 +25,17 @@ export default {
       } else if (this.pin.length !== 4) {
         this.error = "Please enter a 4 digit pin";
         return;
+      } else if (this.pin.includes(" ")) {
+        this.error = "Please enter a 4 digit pin without spaces";
+        return;
       } else {
         this.error = null;
-        new SocketioService().joinRoom(this.pin);
+        this.success = await new SocketioService().joinRoom(this.pin);
+        if (this.success) {
+          this.success = "Room joined successfully";
+        } else {
+          this.error = `Room ${this.pin} is full`;
+        }
       }
     },
   },
@@ -37,6 +46,7 @@ export default {
   <div class="begin-game">
     <h1 class="title">SPACEDAMMERS</h1>
     <div v-if="error">Error: {{ error }}</div>
+    <div v-if="success">Success: {{ success }}</div>
     <div class="game-pin">
       <h1 class="title">Enter Game Pin</h1>
       <div class="start">

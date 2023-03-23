@@ -5,9 +5,7 @@ import { RouterLink, RouterView } from "vue-router";
 <script lang="ts">
 import SocketioService from "./services/socketio.service";
 
-const socket = new SocketioService(
-  "http://localhost:4000"
-).setupSocketConnection();
+const socket = new SocketioService().setupSocketConnection();
 
 // client-side
 socket.on("connect", () => {
