@@ -27,20 +27,24 @@ io.on("connection", (socket) => {
 // When a user joins a room
 io.on("connection", function (socket) {
     socket.on("join", function (roomName: string) {
-        // if there are 2 users in the room, don't let the user join
-        if (io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size === 2) {
-            socket.emit("full", roomName.toLowerCase());
-            console.log("Socket.io user with id:", socket.id, "tried to join full room:", roomName);
+        // Set variables
+        const room = io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size;
+        const lowerCaseRoomName = roomName.toLowerCase();
+
+        // If there are 2 users in the room, don't let a third user join
+        if (room === 2) {
+            socket.emit("full", lowerCaseRoomName);
+            console.log("Socket.io user with id:", socket.id, "tried to join full room:", lowerCaseRoomName);
             return false;
-        } else if (io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size === 1 || io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size === 0) {
-            socket.join(roomName.toLowerCase());
-            socket.emit("joined", roomName.toLowerCase());
-            console.log("Socket.io user with id:", socket.id, "joined room:", roomName);
+        } else if (room === 1 || room === 0) {
+            socket.join(lowerCaseRoomName);
+            socket.emit("joined", lowerCaseRoomName);
+            console.log("Socket.io user with id:", socket.id, "joined room:", lowerCaseRoomName);
             return true;
-        } else if (io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size === undefined) {
-            socket.join(roomName.toLowerCase());
-            socket.emit("joined", roomName.toLowerCase());
-            console.log("Socket.io user with id:", socket.id, "created room:", roomName);
+        } else if (room === undefined) {
+            socket.join(lowerCaseRoomName);
+            socket.emit("joined", lowerCaseRoomName);
+            console.log("Socket.io user with id:", socket.id, "created room:", lowerCaseRoomName);
             return true;
         }
     });
