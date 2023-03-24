@@ -9,7 +9,7 @@
   "scripts": {
     "all": "concurrently -n frontend,backend \"yarn dev --host\" \"npm run websocket\"",
     "dev": "vite",
-    "start": "vite",
+    "start": "npm run all",
     "websocket": "yarn --cwd server dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
