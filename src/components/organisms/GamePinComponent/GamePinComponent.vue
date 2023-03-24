@@ -1,7 +1,7 @@
 <script lang="ts">
-import ButtonComponent from "@/components/atoms/ButtonComponent/button.vue";
-import InputComponent from "@/components/atoms/InputComponent/Input.vue";
-import SocketioService from "@/services/socketio.service";
+import ButtonComponent from "../../atoms/ButtonComponent/Button.vue";
+import InputComponent from "../../atoms/InputComponent/Input.vue";
+import SocketioService from "../../../services/socketio.service.js";
 
 export default {
   name: "GamePinComponent",
@@ -11,15 +11,15 @@ export default {
   },
   data() {
     return {
-      pin: null,
-      error: null,
-      success: null,
+      pin: "",
+      error: "",
+      success: "",
     };
   },
   methods: {
     async sendPin() {
-      this.error = null;
-      if (this.pin === null) {
+      this.error = "";
+      if (!this.pin) {
         this.error = "Please enter a pin";
         return;
       } else if (this.pin.length !== 4) {
@@ -29,12 +29,12 @@ export default {
         this.error = "Please enter a 4 digit pin without spaces";
         return;
       } else {
-        this.error = null;
+        this.error = "";
         this.success = await new SocketioService().joinRoom(this.pin);
         if (this.success) {
           this.success = "Room joined successfully";
         } else {
-          this.error = `Room ${this.pin} is full`;
+          this.error = "Room " + this.pin + " is full";
         }
       }
     },
