@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <script lang="ts">
-import SocketioService from "./services/socketio.service";
+import SocketioService from "./services/socketio.service.js";
 
 const socket = new SocketioService().setupSocketConnection();
 
