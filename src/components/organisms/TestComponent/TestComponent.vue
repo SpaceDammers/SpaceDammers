@@ -1,6 +1,6 @@
 <script lang="ts">
-import ButtonComponent from "@/components/atoms/ButtonComponent/button.vue";
-import InputComponent from "@/components/atoms/InputComponent/Input.vue";
+import ButtonComponent from "../../atoms/ButtonComponent/Button.vue";
+import InputComponent from "../../atoms/InputComponent/Input.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
