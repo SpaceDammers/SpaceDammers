@@ -44,5 +44,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import "@atoms/InputComponent/Input.scss";
+@import "./Input.scss";
 </style>
