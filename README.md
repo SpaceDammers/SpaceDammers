@@ -46,4 +46,5 @@ npm run lint
 ```
 
 
-© 2023
+© 2023 MIT - SpaceDammers <br />
+Made by <a href="https://github.com/chrinsieboy">@Chrinsieboy</a> and <a href="https://github.com/anneliekevdk">@Anneliekevdk</a>
