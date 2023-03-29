@@ -1,3 +1,41 @@
+<template>
+  <div class="begin-game">
+    <h1 class="title">SPACEDAMMERS</h1>
+    <div v-if="error">Error: {{ error }}</div>
+    <div v-if="success">Success: {{ success }}</div>
+    <div class="game-pin" v-if="showGamePin">
+      <h1 class="title">Enter Game Pin</h1>
+      <div class="form">
+        <InputComponent
+          :placeholder="'_ _ _ _'"
+          :class="'game-pin-input'"
+          :orange="true"
+          :max-characters="4"
+          :min-characters="4"
+          v-model="pin"
+          @keydown.enter="sendPin"
+        />
+        <ButtonComponent :text="'Start game'" @click="sendPin" />
+      </div>
+    </div>
+    <div class="name-field" v-if="showNameInput">
+      <h1 class="title">Enter Name</h1>
+      <div class="form">
+        <InputComponent
+          :placeholder="'John doe...'"
+          :class="'name-input'"
+          :orange="true"
+          :max-characters="10"
+          :min-characters="3"
+          v-model="name"
+          @keydown.enter="sendName"
+        />
+        <ButtonComponent :text="'Set name'" @click="sendName" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
 import ButtonComponent from "../../atoms/ButtonComponent/Button.vue";
 import InputComponent from "../../atoms/InputComponent/Input.vue";
@@ -67,44 +105,6 @@ export default {
   },
 };
 </script>
-
-<template>
-  <div class="begin-game">
-    <h1 class="title">SPACEDAMMERS</h1>
-    <div v-if="error">Error: {{ error }}</div>
-    <div v-if="success">Success: {{ success }}</div>
-    <div class="game-pin" v-if="showGamePin">
-      <h1 class="title">Enter Game Pin</h1>
-      <div class="form">
-        <InputComponent
-          :placeholder="'_ _ _ _'"
-          :class="'game-pin-input'"
-          :orange="true"
-          :max-characters="4"
-          :min-characters="4"
-          v-model="pin"
-          @keydown.enter="sendPin"
-        />
-        <ButtonComponent :text="'Start game'" @click="sendPin" />
-      </div>
-    </div>
-    <div class="name-field" v-if="showNameInput">
-      <h1 class="title">Enter Name</h1>
-      <div class="form">
-        <InputComponent
-          :placeholder="'John doe...'"
-          :class="'name-input'"
-          :orange="true"
-          :max-characters="10"
-          :min-characters="3"
-          v-model="name"
-          @keydown.enter="sendName"
-        />
-        <ButtonComponent :text="'Set name'" @click="sendName" />
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss">
 @import "@/components/organisms/GamePinComponent/GamePinComponent.scss";
