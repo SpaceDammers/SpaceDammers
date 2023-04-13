@@ -9,9 +9,11 @@ const app: Express = express();
 const port = process.env.PORT || 4000;
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
+    allowEIO3: true,
     cors: {
-        origin: "*",
         methods: ["GET", "POST"],
+        credentials: true,
+        origin: ['http://localhost:3000']
     },
 });
 
