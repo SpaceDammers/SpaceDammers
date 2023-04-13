@@ -58,6 +58,10 @@ export default {
       showNameInput: false,
     };
   },
+  setup() {
+    const IOserver = new SocketioService();
+    return { IOserver };
+  },
   methods: {
     async sendPin() {
       this.error = "";
@@ -72,9 +76,11 @@ export default {
         return;
       } else {
         this.error = "";
-        this.success = await new SocketioService().joinRoom(this.pin);
+        this.success = await this.IOserver.joinRoom(this.pin);
         if (this.success) {
-          this.success = "Room joined successfully";
+          this.pin = this.pin.toLowerCase();
+          sessionStorage.setItem("roomPin", this.pin);
+          this.success = "Room joined successfully, please enter a name";
           this.showGamePin = false;
           this.showNameInput = true;
         } else {
@@ -98,8 +104,10 @@ export default {
         this.error = "Please enter a 4 digit pin without spaces";
         return;
       } else {
+        console.log("Room", this.pin, "joined by", this.name);
+
         sessionStorage.setItem("name", this.name);
-        this.$router.push("/board");
+        this.$router.push("/game");
       }
     },
   },
