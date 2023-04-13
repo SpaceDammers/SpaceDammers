@@ -9,6 +9,7 @@ export default class SocketioService {
     this.socket = this.setupSocketConnection(token);
   }
 
+  // Setup socket connection
   setupSocketConnection(token) {
     this.socket = io("http://localhost:4000", {
       auth: {
@@ -16,9 +17,15 @@ export default class SocketioService {
       },
     });
     console.log(`Connecting socket...`);
+
+    this.socket.on("disconnect", () => {
+      console.log(`Disconnected from socket`);
+    });
+
     return this.socket;
   }
 
+  // Join or create room
   joinRoom(roomPin) {
     return new Promise((resolve) => {
       // Try to join room
@@ -36,6 +43,20 @@ export default class SocketioService {
         console.log(`Room ${roomPin} is full`);
         resolve(false);
       });
+    });
+  }
+
+  // Send message to server
+  sendMessage(message, roomPin, userName) {
+    this.socket.emit("message", message, roomPin, userName);
+    console.log(`Sending message: '${message}' to room '${roomPin}', by '${this.userName}'`);
+  }
+
+  // Listen for messages from server
+  onMessage() {
+    this.socket.on("message", (message, roomPin, userName) => {
+      console.log(`Onmessage(), Received message: '${message}' in room '${roomPin}' from server, by '${userName}'`);
+      return message;
     });
   }
 
