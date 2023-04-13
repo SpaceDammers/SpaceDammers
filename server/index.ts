@@ -22,6 +22,7 @@ io.on("connection", (socket) => {
     console.log("Socket.io user with id:", socket.id, "connected");
 
     socket.on("disconnect", () => {
+        socket.emit(`disconnected`)
         console.log("Socket.io user with id:", socket.id, "disconnected");
     });
 });
@@ -29,26 +30,41 @@ io.on("connection", (socket) => {
 // When a user joins a room
 io.on("connection", function (socket) {
     socket.on("join", function (roomName: string) {
-        // Set variables
-        const room = io.sockets.adapter.rooms.get(roomName.toLowerCase())?.size;
-        const lowerCaseRoomName = roomName.toLowerCase();
-
-        // If there are 2 users in the room, don't let a third user join
-        if (room === 2) {
-            socket.emit("full", lowerCaseRoomName);
-            console.log("Socket.io user with id:", socket.id, "tried to join full room:", lowerCaseRoomName);
+        // If the room name is not a string, or is an empty string don't let the user join
+        if (roomName === undefined || roomName === null || roomName === "") {
+            socket.emit("invalidRoomName", roomName);
+            console.log("Socket.io user with id:", socket.id, "tried to join invalid room:", roomName);
             return false;
-        } else if (room === 1 || room === 0) {
-            socket.join(lowerCaseRoomName);
-            socket.emit("joined", lowerCaseRoomName);
-            console.log("Socket.io user with id:", socket.id, "joined room:", lowerCaseRoomName);
-            return true;
-        } else if (room === undefined) {
-            socket.join(lowerCaseRoomName);
-            socket.emit("joined", lowerCaseRoomName);
-            console.log("Socket.io user with id:", socket.id, "created room:", lowerCaseRoomName);
-            return true;
+        } else {
+            const lowerCaseRoomName = roomName.toLowerCase();
+            const room = io.sockets.adapter.rooms.get(lowerCaseRoomName);
+
+            // If there are 2 users in the room, don't let a third user join
+            if (room && room.size > 2) {
+                socket.emit("full", lowerCaseRoomName);
+                console.log("Socket.io user with id:", socket.id, "tried to join full room:", lowerCaseRoomName);
+                return false;
+            } else if (room && room.size === 1 || room && room.size === 0) {
+                socket.join(lowerCaseRoomName);
+                socket.emit("joined", lowerCaseRoomName);
+                console.log("Socket.io user with id:", socket.id, "joined room:", lowerCaseRoomName);
+                return true;
+            } else if (room === undefined) {
+                socket.join(lowerCaseRoomName);
+                socket.emit("joined", lowerCaseRoomName);
+                console.log("Socket.io user with id:", socket.id, "created room:", lowerCaseRoomName);
+                return true;
+            }
         }
+    });
+});
+
+// When a user sends a message
+io.on("connection", function (socket) {
+    socket.on("message", function (message: string, roomName: string, userName: string) {
+        console.log(`Message received: '${message}' in room '${roomName}' from user '${userName}'`);
+        socket.to(roomName).emit('message', message, roomName, userName);
+        console.log("Socket.io user with id:", socket.id, "sent message:", message, "to room:", roomName);
     });
 });
 
