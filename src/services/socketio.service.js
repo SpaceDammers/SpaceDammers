@@ -60,6 +60,11 @@ export default class SocketioService {
     });
   }
 
+  // Listen for move piece from server
+  movePiece() {
+    // 
+  }
+
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();
