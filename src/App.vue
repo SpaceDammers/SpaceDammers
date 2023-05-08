@@ -31,6 +31,8 @@ export default {
           <RouterLink to="/about">About</RouterLink>
           <RouterLink to="/test">Test</RouterLink>
           <RouterLink to="/start">Start Screen</RouterLink>
+          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/register">Register</RouterLink>
         </nav>
       </div>
     </header>
