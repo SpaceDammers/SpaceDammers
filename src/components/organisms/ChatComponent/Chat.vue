@@ -48,7 +48,7 @@ export default {
   created() {
     // Check if roomPin is in session storage
     if (!sessionStorage.getItem("roomPin")) {
-      this.$router.push({ name: "Home" });
+      this.$router.push({ name: "home" });
     }
 
     // Get roomPin and userId from session storage
