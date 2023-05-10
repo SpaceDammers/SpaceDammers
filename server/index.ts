@@ -68,6 +68,19 @@ io.on("connection", function (socket) {
     });
 });
 
+io.on("connection", function (socket) {
+    socket.on("reset", () => { //moet je de naam van iets inzetten en dan de functie, nu is functie zonder naam.
+        socket.broadcast.emit("reset") //broadcast doet die naar alle andere clients behalve zich zelf
+
+        socket.broadcast.emit('message', {
+            id: "server",
+            msg: "Het bord is gereset"
+        });
+
+        console.log("reset");
+    })
+});
+
 // Webclient backend
 app.get("/", (req: Request, res: Response) => {
     res.status(200);
