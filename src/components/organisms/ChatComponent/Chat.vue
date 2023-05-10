@@ -42,8 +42,8 @@ export default {
     };
   },
   setup() {
-    const IOserver = new SocketioService();
-    return { IOserver };
+    const socket = new SocketioService();
+    return { socket };
   },
   created() {
     // Check if roomPin is in session storage
@@ -56,17 +56,37 @@ export default {
     this.userId = sessionStorage.getItem("name");
 
     // Join room
-    this.IOserver.joinRoom(this.roomPin);
+    this.socket.joinRoom(this.roomPin);
+
+    this.socket.onMessage((message, roomPin, userName) => {
+      console.log("message", message);
+      console.log("roomPin", roomPin);
+      console.log("userName", userName);
+      
+      this.messages.push({ msg: message.msg, sender: message.sender });
+    });
 
     // Listen for new messages
-    this.IOserver.socket.on("message", (message) => {
-      this.messages.push({ msg: message, sender: "other" });
-    });
+    // this.socket.socket.on("message", (message) => {
+    //   // this.messages.push({ msg: message, sender: "other" });
+    //   console.log('id', message.id)
+    //     // Check if the message is from the server
+    //     if (message.id === "server") {
+    //       this.messageFrom = "server";
+    //       console.log("De server heeft een bericht gestuurd");
+    //     } else {
+    //       this.messageFrom = "other";
+    //       console.log("De user heeft een bericht gestuurd");
+    //       // return;
+    //     }
+
+    //     this.messages.push({ msg: message.msg, sender: this.messageFrom })
+    // });
   },
   methods: {
     async sendMessage() {
       // send message to server
-      this.IOserver.sendMessage(this.newMessage, this.roomPin, this.userId);
+      this.socket.sendMessage(this.newMessage, this.roomPin, this.userId);
 
       // add new message to messages list
       this.messages.push({ msg: this.newMessage, sender: "self" });
