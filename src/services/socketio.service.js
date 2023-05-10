@@ -79,15 +79,9 @@ export default class SocketioService {
   }
 
   onReset() {
-    this.socket.on("reset", () => { //moet je de naam van iets inzetten en dan de functie, nu is functie zonder naam.
-      this.socket.broadcast.emit("reset") //broadcast doet die naar alle andere clients behalve zich zelf
-
-      this.socket.broadcast.emit('message', {
-        id: "server",
-        msg: "Het bord is gereset"
-      });
-
-      console.log("reset");
+    this.socket.on("reset", () => {
+      this.bord.$reset();
+      // console.log("reset", this.bord);
     });
   }
 
