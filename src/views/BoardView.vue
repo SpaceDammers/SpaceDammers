@@ -18,9 +18,9 @@
       </div>
       <div class="right-side">
         <div class="buttons">
-          <button @click="resetBoard(false)">Give up</button>
-          <button @click="resetBoard(false)">Withdraw</button>
-          <button @click="resetBoard(false)">Reset bord</button>
+          <button @click="resetBoard()">Give up</button>
+          <button @click="resetBoard()">Withdraw</button>
+          <button @click="resetBoard()">Reset bord</button>
         </div>
         <Chat />
       </div>
@@ -37,8 +37,6 @@
   import Chat from '../components/organisms/ChatComponent/Chat2.vue';
   import { useBordStore } from "../stores/bord";
   import SocketioService from "../services/socketio.service";
-  // import io from "socket.io-client";
-  // const socket = io("http://localhost:3000");
 
   export default {
     name: 'BoardView',
@@ -49,17 +47,16 @@
       return { bord, socket };
     },
     methods: {
-      resetBoard(resetFromOther) {
-        // // Check eerst of dit bord wordt gereset door de andere speler
-        if (!resetFromOther) {
-          this.socket.resetGame();
-        }
-        // Reset bord
+      resetBoard() {
+        // Reset game on server 
+        this.socket.resetGame();
+
+        // Reset bord on client
         this.bord.$reset();
       },
     },
     created() {
-      // Onreset
+      // If the other player resets the game, reset the game on the client
       this.socket.onReset();
     }
   };
