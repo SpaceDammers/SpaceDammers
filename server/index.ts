@@ -86,4 +86,8 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200);
 });
 
-httpServer.listen(port);
+
+// Listen to httpServer with give port and host
+httpServer.listen(port, () => {
+    console.log(`server is listening on localhost:${port}`);
+});
