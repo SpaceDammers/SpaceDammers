@@ -1,12 +1,20 @@
 import { io } from "socket.io-client";
+import { useBordStore } from "@/stores/bord";
 
 export default class SocketioService {
   socket;
   token;
+  bord;
 
+  // Constructor
   constructor(token) {
     this.token = token;
     this.socket = this.setupSocketConnection(token);
+  }
+  
+  // Init store
+  init() {
+    this.bord = useBordStore();
   }
 
   // Setup socket connection
