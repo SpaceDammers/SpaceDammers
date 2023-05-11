@@ -44,7 +44,7 @@
     signInWithPopup(getAuth(), provider)
       .then((result) => {
         console.log(result);
-        router.push("/feed");
+        router.push("/start");
       })
       .catch((error) => {
         console.log(error);
