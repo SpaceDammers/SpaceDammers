@@ -27,11 +27,11 @@
 </script>
 <style lang="css" scoped>
     .dam-count {
-        width: 349px;
+        width: 350px;
         /* height: 145px; */
         height: 155px;
         background: rgba(237, 19, 93, 0.25);
-        border-radius: 19px;
+        border-radius: 20px;
         padding: 5px 32px;
         display: flex;
         flex-direction: column;

@@ -70,7 +70,8 @@
     border: 1px solid #000000;
     display: flex;
     flex-wrap: wrap;
-    width: 660px;
+    width: 652px;
+    /* width: 660px; */
     /* width: 500px; */
     /* height: 500px; */
     margin: 0 auto;

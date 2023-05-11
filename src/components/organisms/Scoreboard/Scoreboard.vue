@@ -22,11 +22,14 @@
 </script>
 <style lang="css" scoped>
     .scoreboard {
-        width: 349px;
-        height: 350px;
+        width: 350px;
+        /* height: 350px; */
         background: rgba(75, 106, 204, 0.12);
-        border-radius: 19px;
+        border-radius: 20px;
+        /* padding: 20px 32px; */
         padding: 20px 32px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .title {

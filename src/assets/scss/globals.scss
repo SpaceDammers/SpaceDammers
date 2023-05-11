@@ -106,18 +106,16 @@ hr {
     }
 }
 
-
-
 .inputBox {
     background: rgba(237, 19, 93, 0.12);
-        border: 4px solid $landstede-rose;
-        // border: 4px dashed $landstede-rose;
+    border: 4px solid $landstede-rose;
+    // border: 4px dashed $landstede-rose;
     border-radius: 1080px;
     color: $landstede-rose;
     padding: 12px 25px;
     display: flex;
     text-align: center;
-    
+
     font-family: "Voyager";
     font-style: normal;
     font-weight: 400;
@@ -137,7 +135,7 @@ hr {
     }
 }
 
-.buttonsLink{
+.buttonsLink {
     border: none;
     background: no-repeat;
     color: $landstede-rose;
@@ -173,7 +171,7 @@ hr {
         background: rgba(255, 178, 139, 0.22);
         color: $orange;
         border: 4px dashed $orange;
-        border-radius: 1080px; 
+        border-radius: 1080px;
 
         &:hover {
             transform: scale(1.03);
@@ -181,6 +179,37 @@ hr {
         }
     }
 
+    &.gray {
+        color: $disabled;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 12px 42px;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        /* Disabled */
+
+        border: 4px solid #9e9e9e;
+        border-radius: 1080px;
+        &:hover {
+            transform: scale(1.0);
+            color: $landstede-rose;
+
+            border: 4px solid $landstede-rose;
+        }
+    }
+
+    &.size{
+        font-size: 0.8rem;
+        height: 2.5rem;
+        padding: 1px 16px;
+        gap: 0;
+    }
+
+    &.longButton{
+        width: 100%;
+    }
     &.disabled {
         display: flex;
         padding: 12px 42px;
@@ -197,13 +226,13 @@ hr {
     }
 }
 
-.rocket{
+.rocket {
     position: absolute;
     z-index: 0;
-    &__1{
+    &__1 {
         right: 10%;
     }
-    &__2{
+    &__2 {
         left: 15%;
         bottom: 8%;
     }

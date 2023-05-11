@@ -27,10 +27,10 @@ export default {
 </script>
 <style lang="css" scoped>
 .smacked-pieces {
-  width: 349px;
+  width: 350px;
   height: 145px;
   background: rgba(237, 19, 93, 0.25);
-  border-radius: 19px;
+  border-radius: 20px;
   padding: 5px 32px;
   display: flex;
   flex-direction: column;

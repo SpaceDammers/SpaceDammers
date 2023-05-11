@@ -17,11 +17,12 @@
         <BordComponent />
       </div>
       <div class="right-side">
-        <div class="buttons">
-          <button @click="resetBoard(false)">Give up</button>
-          <button @click="resetBoard(false)">Withdraw</button>
-          <button @click="resetBoard(false)">Reset bord</button>
+        <div class="buttonWrap">
+          <button @click="resetBoard(false)" class="buttons gray size">Give up</button>
+          <button @click="resetBoard(false)" class="buttons gray size">Reset bord</button>
         </div>
+        <button @click="resetBoard(false)" class="buttons gray size longButton">Withdraw</button>
+
         <Chat />
       </div>
     </div>
@@ -70,6 +71,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 1rem;
   }
 
   .middle{
@@ -78,13 +80,23 @@
     align-items: center;
 }
 .right-side{
-  width: 20%;
+  /* width: 20%;width: 350px; */
+  width: 250px;
+  display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.7rem;
 }
 
 .left-side{
   display: flex;
     justify-content: space-between;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.7rem;
+}
+
+.buttonWrap{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

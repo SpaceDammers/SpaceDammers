@@ -76,11 +76,13 @@
 
   #chat {
     color: white;
-    border: 3px solid #d90000;
-    height: 100%;
+    /* border: 3px solid #d90000; */
+    /* height: 100%; */
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    background: rgba(75, 106, 204, 0.12);
+    border-radius: 20px;
   }
 
   ul {
