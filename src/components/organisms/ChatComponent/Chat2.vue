@@ -138,5 +138,6 @@ input:focus-visible {
 .sendIcon{
   background: none;
   border: none;
+  padding-top: 0.3rem;
 }
 </style>
