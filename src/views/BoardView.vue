@@ -72,6 +72,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
+    height: 662px;
   }
 
   .middle{

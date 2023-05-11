@@ -1,7 +1,7 @@
 <template>
   <div id="chat">
-    <h2>Chat Room</h2>
     <div>
+    <h2>Chat Room</h2>
       <ul>
         <li
           v-for="(message, index) in messages"
@@ -71,6 +71,9 @@ export default {
 };
 </script>
 <style scoped>
+h2{
+  text-align: center;
+}
 .right {
   text-align: right;
 }
@@ -97,7 +100,8 @@ export default {
 }
 
 ul {
-  height: 440px;
+  /* height: 440px; */
+  height:425px;
   width: 224px;
   font: 16px/26px Georgia, Garamond, Serif;
   overflow: auto;
