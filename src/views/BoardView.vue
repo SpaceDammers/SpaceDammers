@@ -61,10 +61,15 @@
   };
 </script>
 <style scoped>
+.top{
+  font-size: 20px;
+    padding: 15px
+}
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 93vh;
   }
 
   .row {
