@@ -64,8 +64,10 @@
   };
 </script>
 <style scoped>
+
+
   #board {
-    border: 3px solid #2fe976;
+    border: 1px solid #000000;
     display: flex;
     flex-wrap: wrap;
     width: 500px;

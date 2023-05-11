@@ -50,7 +50,8 @@
         } else if (this.squareContent.letter == "x") {
           return "";
         } else if (this.squareContent.letter == "rood") {
-          return "rood";
+              // return "roodRocket";
+              return "rood";
         } else if (this.squareContent.letter == "db") {
           return "black-piece-dam";
         } else if (this.squareContent.letter == "dw") {
@@ -63,6 +64,23 @@
          * mocht dit zo zijn dan ga je meteen door naar de @function colorCheckerPiece() functie
          * is dit niet het geval dan mag je een steen aanklikken en dan krijgt die de groene css op die steen.
         */
+       if(this.bord.checkerPieces[indexRow][indexCol] == "db" || this.bord.checkerPieces[indexRow][indexCol] == "dw"){
+        if (this.bord.redIsOnTheBoard) {
+          this.colorCheckerPiece(indexRow, indexCol);
+          this.sendBoardToServer();
+        } else {
+          var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groen heeft gekregen
+          for (var i = 0; i < oldActive.length; i++) {
+            oldActive[i].classList.remove("groenRocket");
+          }
+          if (this.squareContent.letter != " ") {
+            event.target.classList.add("groenRocket");
+          }
+          this.colorCheckerPiece(indexRow, indexCol);
+          this.sendBoardToServer();
+        }
+       }else{
+        
         if (this.bord.redIsOnTheBoard) {
           this.colorCheckerPiece(indexRow, indexCol);
           this.sendBoardToServer();
@@ -77,6 +95,7 @@
           this.colorCheckerPiece(indexRow, indexCol);
           this.sendBoardToServer();
         }
+      }
       },
       colorCheckerPiece(indexRow, indexCol) {
         /**
@@ -750,32 +769,80 @@
   .piece {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 
   .white-piece {
     /* background-color: #ED135D; */
-    background-color: #ffffff;
+    content: "";
+    background-image: url(/src/assets/ufoWhite.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .white-piece-dam {
-    background-color: #ffe600;
+    /* background-color: #ffe600; */
+    content: "";
+    background-image: url(/src/assets/rocketWhite.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .black-piece {
     /* background-color: #4B6ACC; */
-    background-color: #000000;
+    /* background-color: #000000; */
+    content: "";
+    background-image: url(/src/assets/ufoBlack.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .black-piece-dam {
-    background-color: #1815c0;
+    content: "";
+    background-image: url(/src/assets/rocketBlack.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .rood {
-    background-color: #bd0c0c;
+    background-color: #a51f1f;
+    border-radius: 94px;
+    width: 30px;
+    height: 30px;
+    /* content: "";
+    background-image: url(/src/assets/redUfo.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center; */
+  }
+
+  /* not working */
+  .roodRocket{ 
+    content: "";
+    background-image: url(/src/assets/redRocket.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .groen {
-    border: 4px solid rgb(144, 255, 148);
+    /* border: 4px solid rgb(144, 255, 148); */
+    content: "";
+    background-image: url(/src/assets/greenUfo.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .groenRocket{
+    content: "";
+    background-image: url(/src/assets/greenRocket.png);
+    background-size: 41px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 </style>

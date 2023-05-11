@@ -70,4 +70,10 @@
     display: flex;
     flex-direction: row;
   }
+
+  .middle{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>

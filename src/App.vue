@@ -33,6 +33,8 @@ export default {
           <RouterLink to="/start">Start Screen</RouterLink>
           <RouterLink to="/login">Login</RouterLink>
           <RouterLink to="/register">Register</RouterLink>
+          <RouterLink to="/game">Game</RouterLink>
+
         </nav>
       </div>
     </header>

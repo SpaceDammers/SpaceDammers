@@ -72,11 +72,20 @@
     }
 
     .white-piece-dam {
-        background-color: #ffe600;
+        /* background-color: #ffe600; */
+        content: "";
+        background-image: url(/src/assets/rocketWhite.png);
+        background-size: 41px auto;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .black-piece-dam {
-        background-color: #1815c0;
+        content: "";
+        background-image: url(/src/assets/rocketBlack.png);
+        background-size: 41px auto;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .number {
