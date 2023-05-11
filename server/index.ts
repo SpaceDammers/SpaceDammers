@@ -63,7 +63,8 @@ io.on("connection", function (socket) {
 io.on("connection", function (socket) {
     socket.on("message", function (message: string, roomName: string, userName: string) {
         console.log(`Message received: '${message}' in room '${roomName}' from user '${userName}'`);
-        socket.to(roomName).emit('message', message, roomName, userName);
+        socket.broadcast.emit('message', { id: socket.id, msg: message });
+        // socket.to(roomName).emit('message', message, roomName, userName);
         // console.log("Socket.io user with id:", socket.id, "sent message:", message, "to room:", roomName);
     });
 });
