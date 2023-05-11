@@ -87,6 +87,18 @@ export default class SocketioService {
     });
   }
 
+  sendBoardToServer(checkerPieces) {
+    this.socket.emit("play", checkerPieces);
+    console.log(`Sending board to server...`);
+  }
+
+  onBoardFromServer() {
+    this.socket.on("play", (checkerPieces) => {
+      console.log("Getting board from server...");
+      return checkerPieces;
+    });
+  }
+
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();
