@@ -7,9 +7,9 @@
   "author": "Chris Friemann <github@chris.friemann.nl>",
   "license": "MIT",
   "scripts": {
-    "all": "concurrently -n frontend,backend \"yarn dev --host\" \"npm run websocket\"",
+    "all": "concurrently -n frontend,backend \"yarn dev --host\" \"yarn websocket\"",
     "dev": "vite",
-    "start": "npm run all",
+    "start": "yarn run all",
     "websocket": "yarn --cwd server dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
