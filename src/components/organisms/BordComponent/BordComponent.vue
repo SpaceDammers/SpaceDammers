@@ -70,7 +70,8 @@
     border: 1px solid #000000;
     display: flex;
     flex-wrap: wrap;
-    width: 500px;
+    width: 660px;
+    /* width: 500px; */
     /* height: 500px; */
     margin: 0 auto;
     box-sizing: border-box;
@@ -79,7 +80,8 @@
   .board-row {
     display: flex;
     width: 100%;
-    height: 50px;
+    /* height: 50px; */
+    height: 65px;
   }
 
   .winscreen {

@@ -33,6 +33,7 @@
         color: white;
         font-size: 20px;
         text-align: center;
+        margin-bottom: 5px;
     }
 
     /* ol {
@@ -43,6 +44,7 @@
         list-style-type: none;
         list-style-position: outside;
         padding: 0;
+        margin: 0;
     }
 
     li {

@@ -767,8 +767,10 @@
 </script>
 <style scoped>
   .piece {
-    width: 40px;
-    height: 40px;
+    /* width: 40px;
+    height: 40px; */
+    width: 60px;
+    height: 60px;
     /* border-radius: 50%; */
   }
 
@@ -776,7 +778,7 @@
     /* background-color: #ED135D; */
     content: "";
     background-image: url(/src/assets/ufoWhite.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -785,9 +787,10 @@
     /* background-color: #ffe600; */
     content: "";
     background-image: url(/src/assets/rocketWhite.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
+    margin-top: 4px;
   }
 
   .black-piece {
@@ -795,7 +798,7 @@
     /* background-color: #000000; */
     content: "";
     background-image: url(/src/assets/ufoBlack.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -803,9 +806,10 @@
   .black-piece-dam {
     content: "";
     background-image: url(/src/assets/rocketBlack.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
+    margin-top: 4px;
   }
 
   .rood {
@@ -824,16 +828,17 @@
   .roodRocket{ 
     content: "";
     background-image: url(/src/assets/redRocket.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
+    margin-top: 4px;
   }
 
   .groen {
     /* border: 4px solid rgb(144, 255, 148); */
     content: "";
     background-image: url(/src/assets/greenUfo.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -841,8 +846,9 @@
   .groenRocket{
     content: "";
     background-image: url(/src/assets/greenRocket.png);
-    background-size: 41px auto;
+    background-size: 60px auto;
     background-repeat: no-repeat;
     background-position: center center;
+    margin-top: 4px;
   }
 </style>
