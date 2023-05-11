@@ -40,21 +40,21 @@ io.on("connection", function (socket) {
             const room = io.sockets.adapter.rooms.get(lowerCaseRoomName);
 
             // If there are 2 users in the room, don't let a third user join
-            if (room && room.size > 2) {
-                socket.emit("full", lowerCaseRoomName);
-                console.log("Socket.io user with id:", socket.id, "tried to join full room:", lowerCaseRoomName);
-                return false;
-            } else if (room && room.size === 1 || room && room.size === 0) {
-                socket.join(lowerCaseRoomName);
-                socket.emit("joined", lowerCaseRoomName);
-                console.log("Socket.io user with id:", socket.id, "joined room:", lowerCaseRoomName);
-                return true;
-            } else if (room === undefined) {
+            // if (room && room.size > 2) {
+            //     socket.emit("full", lowerCaseRoomName);
+            //     console.log("Socket.io user with id:", socket.id, "tried to join full room:", lowerCaseRoomName);
+            //     return false;
+            // } else if (room && room.size === 1 || room && room.size === 0) {
+            //     socket.join(lowerCaseRoomName);
+            //     socket.emit("joined", lowerCaseRoomName);
+            //     console.log("Socket.io user with id:", socket.id, "joined room:", lowerCaseRoomName);
+            //     return true;
+            // } else if (room === undefined) {
                 socket.join(lowerCaseRoomName);
                 socket.emit("joined", lowerCaseRoomName);
                 console.log("Socket.io user with id:", socket.id, "created room:", lowerCaseRoomName);
                 return true;
-            }
+            // }
         }
     });
 });
@@ -63,14 +63,39 @@ io.on("connection", function (socket) {
 io.on("connection", function (socket) {
     socket.on("message", function (message: string, roomName: string, userName: string) {
         console.log(`Message received: '${message}' in room '${roomName}' from user '${userName}'`);
-        socket.to(roomName).emit('message', message, roomName, userName);
-        console.log("Socket.io user with id:", socket.id, "sent message:", message, "to room:", roomName);
+        socket.broadcast.emit('message', { id: socket.id, msg: message });
+        // socket.to(roomName).emit('message', message, roomName, userName);
+        // console.log("Socket.io user with id:", socket.id, "sent message:", message, "to room:", roomName);
     });
 });
+
+// When a user presses the reset button
+io.on("connection", function (socket) {
+    socket.on("reset", () => { 
+        socket.broadcast.emit("reset")
+
+        socket.broadcast.emit('message', {
+            id: "server",
+            msg: "Het bord is gereset"
+        });
+
+        console.log("serverside reset");
+    })
+});
+
+io.on("connection", function (socket) {
+    socket.on("play", checkerpieces => {
+        socket.broadcast.emit("play", checkerpieces);
+    })
+}); 
 
 // Webclient backend
 app.get("/", (req: Request, res: Response) => {
     res.status(200);
 });
 
-httpServer.listen(port);
+
+// Listen to httpServer with give port and host
+httpServer.listen(port, () => {
+    console.log(`server is listening on localhost:${port}`);
+});
