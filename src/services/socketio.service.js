@@ -73,11 +73,13 @@ export default class SocketioService {
     });
   }
 
+  // Send reset to server
   resetGame() {
     this.socket.emit("reset");
     console.log(`Resetting game...`);
   }
 
+  // Listen for reset from server
   onReset() {
     this.socket.on("reset", () => {
       this.bord.$reset();
