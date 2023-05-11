@@ -31,10 +31,11 @@ export default {
   height: 145px;
   background: rgba(237, 19, 93, 0.25);
   border-radius: 19px;
-  padding: 20px 32px;
+  padding: 5px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .title {
@@ -42,10 +43,11 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 20px;
   /* identical to box height */
   text-align: center;
   color: #ffffff;
+  margin-bottom: 0;
 }
 
 .smacked {

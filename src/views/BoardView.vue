@@ -69,11 +69,22 @@
   .row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .middle{
   display: flex;
     justify-content: center;
     align-items: center;
+}
+.right-side{
+  width: 20%;
+}
+
+.left-side{
+  display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
 }
 </style>
