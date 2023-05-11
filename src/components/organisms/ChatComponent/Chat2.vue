@@ -14,6 +14,7 @@
 </template>
 <script>
   import io from "socket.io-client";
+  import SocketioService from "@/services/socketio.service";
 
   export default {
     data() {
@@ -25,11 +26,26 @@
         userId: null,
       };
     },
+    setup() {
+      const socket = new SocketioService();
+      return { socket };
+    },
     created() {
-      // connect to Socket.io server
-      this.socket = io("http://localhost:3000")
-      // listen for incoming messages
-      this.socket.on("message", (message) => {
+      // Check if roomPin is in session storage
+      if (!sessionStorage.getItem("roomPin")) {
+        this.$router.push({ name: "home" });
+      }
+
+      // Get roomPin and userId from session storage
+      this.roomPin = sessionStorage.getItem("roomPin");
+      this.userId = sessionStorage.getItem("name");
+
+      // Join room
+      this.socket.joinRoom(this.roomPin);
+
+      // Listen for new messages
+      this.socket.socket.on("message", (message) => {
+        // this.messages.push({ msg: message, sender: "other" });
         console.log('id', message.id)
         // Check if the message is from the server
         if (message.id === "server") {
@@ -48,7 +64,9 @@
       sendMessage() {
 
         // send new message to server
-        this.socket.emit("message", this.newMessage);
+        // this.socket.emit("message", this.newMessage);
+        this.socket.sendMessage(this.newMessage, this.roomPin, this.userId);
+
 
         // add new message to messages list
         this.messages.push({ msg: this.newMessage, sender: 'self' });
