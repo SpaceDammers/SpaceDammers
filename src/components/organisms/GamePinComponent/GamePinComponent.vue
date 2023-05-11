@@ -1,3 +1,43 @@
+<template>
+  <div class="begin-game">
+    <img src="/src/assets/rocketTwo.png" class="rocket rocket__1">
+    <img src="/src/assets/rocketOne.png" class="rocket rocket__2">
+    <h1 class="title">SPACEDAMMERS</h1>
+    <div v-if="error">Error: {{ error }}</div>
+    <div v-if="success">Success: {{ success }}</div>
+    <div class="game-pin" v-if="showGamePin">
+      <h1 class="title">Enter Game Pin</h1>
+      <div class="form">
+        <InputComponent
+          :placeholder="'_ _ _ _'"
+          :class="'game-pin-input'"
+          :orange="true"
+          :max-characters="4"
+          :min-characters="4"
+          v-model="pin"
+          @keydown.enter="sendPin"
+        />
+        <ButtonComponent :text="'Start game'" @click="sendPin" />
+      </div>
+    </div>
+    <div class="name-field" v-if="showNameInput">
+      <h1 class="title">Enter Name</h1>
+      <div class="form">
+        <InputComponent
+          :placeholder="'John doe...'"
+          :class="'name-input'"
+          :orange="true"
+          :max-characters="10"
+          :min-characters="3"
+          v-model="name"
+          @keydown.enter="sendName"
+        />
+        <ButtonComponent :text="'Set name'" @click="sendName" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
 import ButtonComponent from "../../atoms/ButtonComponent/Button.vue";
 import InputComponent from "../../atoms/InputComponent/Input.vue";
@@ -12,9 +52,17 @@ export default {
   data() {
     return {
       pin: "",
+      name: "",
       error: "",
       success: "",
+      loader: false,
+      showGamePin: true,
+      showNameInput: false,
     };
+  },
+  setup() {
+    const IOserver = new SocketioService();
+    return { IOserver };
   },
   methods: {
     async sendPin() {
@@ -30,40 +78,43 @@ export default {
         return;
       } else {
         this.error = "";
-        this.success = await new SocketioService().joinRoom(this.pin);
+        this.success = await this.IOserver.joinRoom(this.pin);
         if (this.success) {
-          this.success = "Room joined successfully";
+          this.pin = this.pin.toLowerCase();
+          sessionStorage.setItem("roomPin", this.pin);
+          this.success = "Room joined successfully, please enter a name";
+          this.showGamePin = false;
+          this.showNameInput = true;
         } else {
           this.error = "Room " + this.pin + " is full";
         }
       }
     },
+    sendName() {
+      this.error = "";
+      this.success = "";
+      if (!this.name) {
+        this.error = "Please enter a name";
+        return;
+      } else if (this.name.length < 3) {
+        this.error = "Please enter a name that is longer then 3 characters";
+        return;
+      } else if (this.name.length > 10) {
+        this.error = "Please enter a name that is shorter then 10 characters";
+        return;
+      } else if (this.name.includes(" ")) {
+        this.error = "Please enter a 4 digit pin without spaces";
+        return;
+      } else {
+        console.log("Room", this.pin, "joined by", this.name);
+
+        sessionStorage.setItem("name", this.name);
+        this.$router.push("/game");
+      }
+    },
   },
 };
 </script>
-
-<template>
-  <div class="begin-game">
-    <h1 class="title">SPACEDAMMERS</h1>
-    <div v-if="error">Error: {{ error }}</div>
-    <div v-if="success">Success: {{ success }}</div>
-    <div class="game-pin">
-      <h1 class="title">Enter Game Pin</h1>
-      <div class="start">
-        <InputComponent
-          :placeholder="'_ _ _ _'"
-          :class="'game-pin-input'"
-          :orange="true"
-          :max-characters="4"
-          :min-characters="4"
-          v-model="pin"
-          @keydown.enter="sendPin"
-        />
-        <ButtonComponent :text="'Start game'" @click="sendPin" />
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss">
 @import "@/components/organisms/GamePinComponent/GamePinComponent.scss";

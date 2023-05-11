@@ -4,9 +4,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes: [
     {
-      path: '/',
+      // path: '/',
       name: 'home',
-      component: () => import('../views/HomeView.vue')
+      // component: () => import('../views/HomeView.vue')
+      // reroute to startscreen
+      path: '/',
+      redirect: '/start'
     },
     {
       path: '/about',
@@ -26,6 +29,21 @@ const router = createRouter({
       path: '/start',
       name: 'start',
       component: () => import('../views/StartView.vue')
+    },
+    {
+      path: '/game',
+      name: 'game',
+      component: () => import('../views/BoardView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/RegisterView.vue')
     }
   ]
 })
