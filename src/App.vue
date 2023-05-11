@@ -27,12 +27,14 @@ export default {
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/test">Test</RouterLink>
+          <!-- <RouterLink to="/">Home</RouterLink> -->
+          <!-- <RouterLink to="/about">About</RouterLink> -->
+          <!-- <RouterLink to="/test">Test</RouterLink> -->
           <RouterLink to="/start">Start Screen</RouterLink>
           <RouterLink to="/login">Login</RouterLink>
           <RouterLink to="/register">Register</RouterLink>
+          <RouterLink to="/game">Game</RouterLink>
+
         </nav>
       </div>
     </header>
@@ -41,6 +43,13 @@ export default {
 </template>
 
 <style scoped>
+
+nav{
+    width: 100vw !important;
+    margin: auto !important;
+    justify-content: center !important;
+    display: flex !important;
+}
 .background {
   background-image: url("@/assets/svg/background.svg");
   background-size: cover;

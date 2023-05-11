@@ -26,8 +26,10 @@
 </script>
 <style scoped>
   .square {
-    width: 50px;
-    height: 50px;
+    /* width: 50px;
+    height: 50px; */
+    width: 65px;
+    height: 65px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;

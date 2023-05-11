@@ -27,11 +27,12 @@
 </script>
 <style lang="css" scoped>
     .dam-count {
-        width: 349px;
-        height: 145px;
+        width: 350px;
+        /* height: 145px; */
+        height: 155px;
         background: rgba(237, 19, 93, 0.25);
-        border-radius: 19px;
-        padding: 20px 32px;
+        border-radius: 20px;
+        padding: 5px 32px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -42,10 +43,11 @@
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
-        line-height: 23px;
+        line-height: 20px;
         /* identical to box height */
         text-align: center;
         color: #FFFFFF;
+        margin-bottom: 0;
     }
 
     .count {
@@ -55,7 +57,7 @@
         align-items: center;
         width: 100%;
         height: 100%;
-        padding-top: 15px;
+        /* padding-top: 15px; */
     }
 
     .dam {
@@ -66,20 +68,29 @@
     }
 
     .piece {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+        width: 60px;
+        height: 70px;
     }
 
     .white-piece-dam {
-        background-color: #ffe600;
+        /* background-color: #ffe600; */
+        content: "";
+        background-image: url(/src/assets/rocketWhite.png);
+        background-size: 70px auto;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .black-piece-dam {
-        background-color: #1815c0;
+        content: "";
+        background-image: url(/src/assets/rocketBlack.png);
+        background-size: 70px auto;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .number {
+        margin: 0;
         padding-top: 8px;
         color: white;
     }

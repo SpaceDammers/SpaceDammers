@@ -17,11 +17,12 @@
         <BordComponent />
       </div>
       <div class="right-side">
-        <div class="buttons">
-          <button @click="resetBoard()">Give up</button>
-          <button @click="resetBoard()">Withdraw</button>
-          <button @click="resetBoard()">Reset bord</button>
+        <div class="buttonWrap">
+          <button @click="resetBoard()" class="buttons gray size">Give up</button>
+          <button @click="resetBoard()" class="buttons gray size">Reset bord</button>
         </div>
+        <button @click="resetBoard()" class="buttons gray size longButton">Withdraw</button>
+
         <Chat />
       </div>
     </div>
@@ -62,14 +63,48 @@
   };
 </script>
 <style scoped>
+.top{
+  font-size: 20px;
+    padding: 15px
+}
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 93vh;
   }
 
   .row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 662px;
   }
+
+  .middle{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.right-side{
+  /* width: 20%;width: 350px; */
+  width: 250px;
+  display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.left-side{
+  display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.buttonWrap{
+  display: flex;
+  justify-content: space-between;
+}
 </style>

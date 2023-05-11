@@ -4,9 +4,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes: [
     {
-      path: '/',
+      // path: '/',
       name: 'home',
-      component: () => import('../views/HomeView.vue')
+      // component: () => import('../views/HomeView.vue')
+      // reroute to startscreen
+      path: '/',
+      redirect: '/start'
     },
     {
       path: '/about',

@@ -1,5 +1,7 @@
 <template>
   <div class="begin-game">
+    <img src="/src/assets/rocketTwo.png" class="rocket rocket__1">
+    <img src="/src/assets/rocketOne.png" class="rocket rocket__2">
     <h1 class="title">SPACEDAMMERS</h1>
     <div v-if="error">Error: {{ error }}</div>
     <div v-if="success">Success: {{ success }}</div>

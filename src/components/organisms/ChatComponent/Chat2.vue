@@ -1,13 +1,25 @@
 <template>
   <div id="chat">
-    <h2>Chat Room</h2>
     <div>
+    <h2>Chat Room</h2>
       <ul>
-        <li v-for="(message, index) in messages" :key="index" :class="message.sender === 'self' ? 'right' : (message.sender === 'server' ? 'server' : 'left')"> {{ message.msg }} </li>
+        <li
+          v-for="(message, index) in messages"
+          :key="index"
+          :class="
+            message.sender === 'self'
+              ? 'right'
+              : message.sender === 'server'
+              ? 'server'
+              : 'left'
+          "
+        >
+          {{ message.msg }}
+        </li>
       </ul>
-      <form @submit.prevent="sendMessage">
+      <form @submit.prevent="sendMessage" class="inputFieldChat">
         <input type="text" v-model="newMessage" />
-        <button type="submit">Send</button>
+        <button type="submit" class="sendIcon"><img src="/src/assets/sendIcon.png"></button>
       </form>
     </div>
   </div>
@@ -16,12 +28,12 @@
   import io from "socket.io-client";
   import SocketioService from "@/services/socketio.service";
 
-  export default {
-    data() {
-      return {
-        messages: [],
-        newMessage: "",
-        messageFrom: "",
+export default {
+  data() {
+    return {
+      messages: [],
+      newMessage: "",
+      messageFrom: "",
 
         userId: null,
       };
@@ -68,45 +80,83 @@
         this.socket.sendMessage(this.newMessage, this.roomPin, this.userId);
 
 
-        // add new message to messages list
-        this.messages.push({ msg: this.newMessage, sender: 'self' });
+      // add new message to messages list
+      this.messages.push({ msg: this.newMessage, sender: "self" });
 
-        // clear input field
-        this.newMessage = "";
-      }
+      // clear input field
+      this.newMessage = "";
     },
-  };
+  },
+};
 </script>
 <style scoped>
-  .right {
-    text-align: right;
-  }
+h2{
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
 
-  .left {
-    text-align: left;
-  }
+.left {
+  text-align: left;
+}
 
-  .server {
-    text-align: center;
-    color: gray;
-    font-style: italic;
-  }
+.server {
+  text-align: center;
+  color: gray;
+  font-style: italic;
+}
 
-  #chat {
-    color: white;
-    border: 3px solid #d90000;
-    height: 100%;
-    justify-content: space-between;
+#chat {
+  color: white;
+  /* border: 3px solid #d90000; */
+  /* height: 100%; */
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  background: rgba(75, 106, 204, 0.12);
+  border-radius: 20px;
+}
+
+ul {
+  /* height: 440px; */
+  height:425px;
+  width: 224px;
+  font: 16px/26px Georgia, Garamond, Serif;
+  overflow: auto;
+  list-style: none;
+  padding: 0;
+}
+
+.inputFieldChat {
+  background: rgba(237, 19, 93, 0.12);
+  border: 4px solid #ed135d;
+  border-radius: 1080px;
+  padding: 0.3rem;
+    padding-left: 1rem;
+
     display: flex;
-    flex-direction: column;
-  }
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 0.2rem;
 
-  ul {
-    height: 440px;
-    width: 224px;
-    font: 16px/26px Georgia, Garamond, Serif;
-    overflow: auto;
-    list-style: none;
-    padding: 0;
-  }
+    width: 96%;
+}
+
+input{
+  background: none;
+  border: none;
+  color: #ed135d;
+}
+
+input:focus-visible {
+    outline-offset: 0px;
+    outline: transparent;
+}
+
+.sendIcon{
+  background: none;
+  border: none;
+  padding-top: 0.3rem;
+}
 </style>

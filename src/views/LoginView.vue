@@ -1,10 +1,13 @@
 <template>
+    <img src="/src/assets/rocketOne.png" class="rocket rocket__2">
+  <div class="begin-game">
   <h1>Sign in account</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
+  <p><input type="text" placeholder="Email" v-model="email" class="inputBox"/></p>
+  <p><input type="password" placeholder="Password" v-model="password" class="inputBox" /></p>
   <p v-if="errMsg">{{ errMsg }}</p>
-  <p><button @click="register">Submit</button></p>
-  <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+  <p><button @click="register" class="buttons">Submit</button></p>
+  <p><button @click="signInWithGoogle" class="buttonsLink">Sign In With Google</button></p>
+</div>
 </template>
 <script setup>
   import { ref } from "vue";
@@ -62,3 +65,16 @@
       });
   };
 </script>
+
+<style scoped >
+
+.begin-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: -6rem;
+}
+
+</style>
