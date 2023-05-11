@@ -25,6 +25,7 @@
     "pinia": "^2.0.33",
     "rollup": "^3.21.5",
     "socket.io-client": "^4.6.1",
+    "socket.io": "^4.6.1",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
