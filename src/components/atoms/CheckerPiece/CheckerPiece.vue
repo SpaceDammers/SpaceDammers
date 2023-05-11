@@ -813,15 +813,15 @@
   }
 
   .rood {
-    background-color: #a51f1f;
-    border-radius: 94px;
-    width: 30px;
-    height: 30px;
-    /* content: "";
-    background-image: url(/src/assets/redUfo.png);
+    /* background-color: #a51f1f;
+    border-radius: 94px; */
+    width: 65px;
+    height: 65px;
+    content: "";
+    background-image: url(/src/assets/circleBlue.png);
     background-size: 41px auto;
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: center center;
   }
 
   /* not working */
