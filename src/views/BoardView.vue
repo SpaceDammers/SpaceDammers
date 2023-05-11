@@ -34,7 +34,7 @@
   import SmackedPieces from '../components/organisms/SmackedPieces/SmackedPieces.vue';
   import DamCount from '../components/organisms/DamCount/DamCount.vue';
   import BordComponent from '../components/organisms/BordComponent/BordComponent.vue';
-  import Chat from '../components/organisms/ChatComponent/Chat.vue';
+  import Chat from '../components/organisms/ChatComponent/Chat2.vue';
   import { useBordStore } from "../stores/bord";
   import SocketioService from "../services/socketio.service";
 
