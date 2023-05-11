@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="winscreen" v-if="bord.winner !== ''">
-      <h1 class="title">{{bord.winner}} heeft gewonnen!</h1>
+    <div class="winscreen" v-if="this.bord.winner !== ''">
+      <h1 class="title">{{this.bord.winner}} heeft gewonnen!</h1>
       <div class="btns">
-        <button @click="bord.$reset();">Speel opnieuw</button>
+        <button @click="resetGame();">Speel opnieuw</button>
         <button @click="goToMenu();">Terug naar menu</button>
       </div>
     </div>
@@ -19,7 +19,7 @@
   import CheckerPiece from "../../atoms/CheckerPiece/CheckerPiece.vue";
   import { useBordStore } from "../../../stores/bord";
   import io from "socket.io-client";
-  const socket = io("http://localhost:3000");
+  const socket = io("http://localhost:4000");
 
   export default {
     name: "BordComponent",
@@ -32,6 +32,7 @@
       return {
         checkerPieces: this.bord.checkerPieces,
         whiteTurn: true,
+        winner: "",
         // blackcounter: 0,
         // whitecounter: 0,
       };
@@ -49,13 +50,17 @@
       goToMenu() {
         this.$router.push("/");
       },
+      resetGame() {
+        socket.resetGame();
+      }
     },
     created() {
       // Socket events
-      socket.on("play", (index) => {
-        // console.log("kiekeboe index", index);
-        winner = this.bord.winner
-      });
+      // socket.on("play", (index) => {
+      //   // console.log("kiekeboe index", index);
+      //   this.bord.checkerPieces = index
+      //   // winner = this.bord.winner
+      // });
       socket.on("reset", () => {
         // console.log("clear");
         this.bord.$reset();
