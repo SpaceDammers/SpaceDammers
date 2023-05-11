@@ -83,6 +83,12 @@ io.on("connection", function (socket) {
     })
 });
 
+io.on("connection", function (socket) {
+    socket.on("play", index => {
+        socket.broadcast.emit("play", index);
+    })
+}); 
+
 // Webclient backend
 app.get("/", (req: Request, res: Response) => {
     res.status(200);
