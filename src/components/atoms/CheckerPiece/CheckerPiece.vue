@@ -70,17 +70,30 @@ export default {
           this.colorCheckerPiece(indexRow, indexCol);
           this.sendBoardToServer();
         } else {
-          console.log("weet niet meer wat plan was send help") //hier moet iets
 
-          var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groen heeft gekregen
-          for (var i = 0; i < oldActive.length; i++) {
-            oldActive[i].classList.remove("groenRocket");
+          console.log("dam kiekeboe")
+          if (this.bord.whiteTurn && this.bord.checkerPieces[indexRow][indexCol] == "dw") {
+            var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groenRocket heeft gekregen
+            for (var i = 0; i < oldActive.length; i++) {
+              oldActive[i].classList.remove("groenRocket");
+            }
+            if (this.squareContent.letter != " ") {
+              event.target.classList.add("groenRocket");
+            }
+            this.colorCheckerPiece(indexRow, indexCol);
+            this.sendBoardToServer();
           }
-          if (this.squareContent.letter != " ") {
-            event.target.classList.add("groenRocket");
+          if (!this.bord.whiteTurn && this.bord.checkerPieces[indexRow][indexCol] == "db") {
+            var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groenRocket heeft gekregen
+            for (var i = 0; i < oldActive.length; i++) {
+              oldActive[i].classList.remove("groenRocket");
+            }
+            if (this.squareContent.letter != " ") {
+              event.target.classList.add("groenRocket");
+            }
+            this.colorCheckerPiece(indexRow, indexCol);
+            this.sendBoardToServer();
           }
-          this.colorCheckerPiece(indexRow, indexCol);
-          this.sendBoardToServer();
         }
 
       } else {
@@ -89,20 +102,7 @@ export default {
           this.colorCheckerPiece(indexRow, indexCol);
           this.sendBoardToServer();
         } else {
-          // if (this.bord.eenmaligeCount == 0) { //eerste ronde
-          //   var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
-          //   for (var i = 0; i < oldActive.length; i++) {
-          //     oldActive[i].classList.remove("groen");
-          //   }
-          //     if (this.squareContent.letter != " ") {
-          //       event.target.classList.add("groen");
-          //     }
-          //     this.colorCheckerPiece(indexRow, indexCol);
-          //     this.sendBoardToServer();
-          //     this.bord.eenmaligeCount = this.bord.eenmaligeCount + 1;
-          //   }
-          // if (this.bord.eenmaligeCount >= 1) {
-          console.log("kiekeboe")
+          console.log("dam kiekeboe")
           if (this.bord.whiteTurn && this.bord.checkerPieces[indexRow][indexCol] == "w") {
             var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
             for (var i = 0; i < oldActive.length; i++) {
@@ -126,7 +126,6 @@ export default {
             this.sendBoardToServer();
           }
         }
-        // }
       }
     },
     colorCheckerPiece(indexRow, indexCol) {
