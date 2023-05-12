@@ -31,22 +31,14 @@
     data() {
       return {
         checkerPieces: this.bord.checkerPieces,
-        whiteTurn: true,
+        
         winner: "",
         // blackcounter: 0,
         // whitecounter: 0,
       };
     },
     methods: {
-      changeBlackTurn() {
-        //hier wordt gekeken wie er aan de burt is (alleen doet dit natuurlijk nu nog niks maar zo kan het er uit zien)
-        this.whiteTurn = false;
-        return this.whiteTurn;
-      },
-      changeWhiteTurn() {
-        this.whiteTurn = true;
-        return this.whiteTurn;
-      },
+     
       goToMenu() {
         this.$router.push("/");
       },
