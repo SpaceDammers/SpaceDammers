@@ -856,6 +856,10 @@
           hitLeft1Back = 0
           this.sendBoardToServer();
         }
+
+        if(color == "dw" || color == "db"){
+
+        }
        
           if (this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetter && this.bord.checkerPieces[hitRight1][hitRight2] == " " || this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetterKing && this.bord.checkerPieces[hitRight1][hitRight2] == " ") {
             this.bord.checkerPieces[hitRight1][hitRight2] = "rood"
@@ -886,6 +890,210 @@
             this.bord.redIsOnTheBoard = true;
             this.sendBoardToServer();
           }
+
+
+          // ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        this.bord.selectedPiece = "" + indexRow + indexCol;
+        this.bord.oldLetter = this.bord.checkerPieces[indexRow][indexCol];
+        let checkLetter1 = "";
+        let checkLetter2 = "";
+
+        if (color == "db") {
+          checkLetter1 = "w"; //zo weet die over welke stenen die wel mag slaan
+          checkLetter2 = "dw";
+          this.sendBoardToServer();
+        } else if (color == "dw") {
+          checkLetter1 = "b";
+          checkLetter2 = "db";
+        }
+        let ThereHasBeenAHit = false;
+        //linksachter
+        for (let i = 1; i < 10; i++) {
+          if (Math.abs(-this.bord.selectedPiece - 9 * i) > 99 || Math.abs(-this.bord.selectedPiece - 9 * i) < 0) {
+            i = 10;
+          } else {
+            this.posibleLeft = Math.abs(-this.bord.selectedPiece - 9 * i).toString();
+
+            let left1 = parseInt(this.posibleLeft.charAt(0));
+            let left2 = parseInt(this.posibleLeft.charAt(1));
+            if (this.bord.checkerPieces[left1][left2] == " ") {
+              // this.bord.checkerPieces[left1][left2] = "rood";
+              // this.bord.redIsOnTheBoard = true;
+            } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
+              //hier loop je tegen een tegenstander
+              if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
+                i = 10;
+              } else {
+                i++; //1optellen
+                if (Math.abs(-this.bord.selectedPiece - 9 * i) > 99 || Math.abs(-this.bord.selectedPiece - 9 * i) < 0) {  //kijken of het niet uit het bord gaat
+                  i = 10; //anders einde oefening
+                } else { //anders door
+                  this.posibleLeft = Math.abs(-this.bord.selectedPiece - 9 * i).toString();
+                  let left1 = parseInt(this.posibleLeft.charAt(0));
+                  let left2 = parseInt(this.posibleLeft.charAt(1));
+                  if (this.bord.checkerPieces[left1][left2] == " ") {
+                    this.bord.checkerPieces[left1][left2] = "rood";
+                    this.bord.redIsOnTheBoard = true;
+                    this.bord.youMaySmackKing = true;
+                    ThereHasBeenAHit = true;
+                  } else { // er is al geslagen dus stop het.
+                    i = 10;
+                  }
+                }
+              }
+            } else { //als je tegen je eigen gaat stop het
+              i = 10;
+            }
+          }
+        }
+        //rechtsachter
+        ThereHasBeenAHit = false;
+        for (let i = 1; i < 10; i++) {
+          if (Math.abs(-this.bord.selectedPiece - 11 * i) > 99 || Math.abs(-this.bord.selectedPiece - 11 * i) < 0) {
+            i = 10;
+          } else {
+            this.posibleLeft = Math.abs(-this.bord.selectedPiece - 11 * i).toString();
+            let left1 = parseInt(this.posibleLeft.charAt(0));
+            let left2 = parseInt(this.posibleLeft.charAt(1));
+            if (this.bord.checkerPieces[left1][left2] == " ") {
+              // this.bord.checkerPieces[left1][left2] = "rood";
+              // this.bord.redIsOnTheBoard = true;
+            } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
+              //hier loop je tegen een tegenstander
+              if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
+                i = 10;
+              } else {
+                i++; //1optellen
+                if (Math.abs(-this.bord.selectedPiece - 11 * i) > 99 || Math.abs(-this.bord.selectedPiece - 11 * i) < 0) {  //kijken of het niet uit het bord gaat
+                  i = 10; //anders einde oefening
+                } else { //anders door
+                  this.posibleLeft = Math.abs(-this.bord.selectedPiece - 11 * i).toString();
+                  let left1 = parseInt(this.posibleLeft.charAt(0));
+                  let left2 = parseInt(this.posibleLeft.charAt(1));
+                  if (this.bord.checkerPieces[left1][left2] == " ") {
+                    this.bord.checkerPieces[left1][left2] = "rood";
+                    this.bord.redIsOnTheBoard = true;
+                    ThereHasBeenAHit = true;
+                    this.bord.youMaySmackKing = true;
+                  } else { // er is al geslagen dus stop het.
+                    i = 10;
+                  }
+                }
+              }
+            } else { //als je tegen je eigen gaat stop het
+              i = 10;
+            }
+          }
+        }
+        //linksvoor
+        ThereHasBeenAHit = false;
+        for (let i = 1; i < 10; i++) {
+          if (Math.abs(this.bord.selectedPiece - 11 * i) > 99 || Math.abs(this.bord.selectedPiece - 11 * i) < 0) {
+            i = 10;
+          } else {
+            this.posibleLeft = Math.abs(this.bord.selectedPiece - 11 * i).toString();
+            let left1;
+            let left2;
+            if (this.posibleLeft < 10) {
+              left1 = 0;
+              left2 = parseInt(this.posibleLeft.charAt(0));
+            } else {
+              left1 = parseInt(this.posibleLeft.charAt(0));
+              left2 = parseInt(this.posibleLeft.charAt(1));
+            }
+            if (this.bord.checkerPieces[left1][left2] == " ") {
+              // this.bord.checkerPieces[left1][left2] = "rood";
+              // this.bord.redIsOnTheBoard = true;
+              if (this.posibleLeft <= 11) {
+                i = 10;
+              }
+            } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
+              //hier loop je tegen een tegenstander
+              if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
+                i = 10;
+              } else {
+                i++; //1optellen
+                if (Math.abs(this.bord.selectedPiece - 11 * i) > 99 || Math.abs(this.bord.selectedPiece - 11 * i) < 0) {  //kijken of het niet uit het bord gaat
+                  i = 10; //anders einde oefening
+                } else { //anders door
+                  this.posibleLeft = Math.abs(this.bord.selectedPiece - 11 * i).toString();
+                  if (this.posibleLeft < 9) {
+                    left1 = 0;
+                    left2 = parseInt(this.posibleLeft.charAt(0));
+                    i = 10;
+                  } else {
+                    left1 = parseInt(this.posibleLeft.charAt(0));
+                    left2 = parseInt(this.posibleLeft.charAt(1));
+                  }
+                  if (this.bord.checkerPieces[left1][left2] == " ") {
+                    this.bord.checkerPieces[left1][left2] = "rood";
+                    this.bord.redIsOnTheBoard = true;
+                    this.bord.youMaySmackKing = true;
+                    ThereHasBeenAHit = true;
+                  } else { // er is al geslagen dus stop het.
+                    i = 10;
+                  }
+                }
+              }
+            } else { //als je tegen je eigen gaat stop het
+              i = 10;
+            }
+          }
+        }
+        //rechtsvoor
+        ThereHasBeenAHit = false;
+        for (let i = 1; i < 10; i++) {
+          if (Math.abs(this.bord.selectedPiece - 9 * i) > 99 || Math.abs(this.bord.selectedPiece - 9 * i) < 0) {
+            i = 10;
+          } else {
+            this.posibleLeft = Math.abs(this.bord.selectedPiece - 9 * i).toString();
+            let left1;
+            let left2;
+            if (this.posibleLeft < 10) {
+              left1 = 0;
+              left2 = parseInt(this.posibleLeft.charAt(0));
+            } else {
+              left1 = parseInt(this.posibleLeft.charAt(0));
+              left2 = parseInt(this.posibleLeft.charAt(1));
+            }
+            if (this.bord.checkerPieces[left1][left2] == " ") {
+              // this.bord.checkerPieces[left1][left2] = "rood";
+              // this.bord.redIsOnTheBoard = true;
+            } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
+              //hier loop je tegen een tegenstander
+              if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
+                i = 10;
+              } else {
+                i++; //1optellen
+                if (Math.abs(this.bord.selectedPiece - 9 * i) > 99 || Math.abs(this.bord.selectedPiece - 9 * i) < 0) {  //kijken of het niet uit het bord gaat
+                  i = 10; //anders einde oefening
+                } else { //anders door
+                  this.posibleLeft = Math.abs(this.bord.selectedPiece - 9 * i).toString();
+                  if (this.posibleLeft < 10) {
+                    left1 = 0;
+                    left2 = parseInt(this.posibleLeft.charAt(0));
+                  } else {
+                    left1 = parseInt(this.posibleLeft.charAt(0));
+                    left2 = parseInt(this.posibleLeft.charAt(1));
+                  }
+                  if (this.bord.checkerPieces[left1][left2] == " ") {
+                    this.bord.checkerPieces[left1][left2] = "rood";
+                    this.bord.redIsOnTheBoard = true;
+                    this.bord.youMaySmackKing = true;
+                    ThereHasBeenAHit = true;
+                  } else { // er is al geslagen dus stop het.
+                    i = 10;
+                  }
+                }
+              }
+            } else { //als je tegen je eigen gaat stop het
+              i = 10;
+            }
+          }
+        }
 
       },
       changePieceToDam(indexRow, indexCol) {
