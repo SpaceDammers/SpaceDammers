@@ -16,7 +16,7 @@
 <script>
     import { useBordStore } from "../../../stores/bord";
     // import io from "socket.io-client";
-    // const socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT);
+    // const socket = io(import.meta.env.VITE_APP_SOCKET_ENDPOINT);
     export default {
         name: 'DamCount',
         setup() {

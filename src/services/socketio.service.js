@@ -19,7 +19,7 @@ export default class SocketioService {
 
   // Setup socket connection
   setupSocketConnection(token) {
-    this.socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT, {
+    this.socket = io(import.meta.env.VITE_APP_SOCKET_ENDPOINT, {
       auth: {
         token,
       },
