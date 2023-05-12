@@ -19,12 +19,17 @@ export default class SocketioService {
 
   // Setup socket connection
   setupSocketConnection(token) {
-    this.socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT || "http://localhost:4000", {
+    this.socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT, {
       auth: {
         token,
       },
     });
     console.log(`Connecting socket...`);
+
+    // If connection failed or timed out
+    this.socket.on("connect_error", (err) => {  
+      console.log(`Connection failed: ${err.message}`);
+    });
 
     // If connected successfully
     this.socket.on("connect", () => {
