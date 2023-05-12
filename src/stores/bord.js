@@ -29,6 +29,9 @@ export const useBordStore = defineStore("bord", () => {
   const redIsOnTheBoard = ref(false);
   const winner = ref("");
 
+  const whiteTurn= ref(true);
+  const eenmaligeCount = ref(0);
+  const keepGoing= ref(true);
 
   function $reset() {
     checkerPieces.value = [
@@ -57,6 +60,10 @@ export const useBordStore = defineStore("bord", () => {
 
     redIsOnTheBoard.value = false;
     winner.value = "";
+
+    whiteTurn.value = true;
+    eenmaligeCount.value = 0;
+    keepGoing.value = true;
   }
   return {
     checkerPieces,
@@ -69,6 +76,9 @@ export const useBordStore = defineStore("bord", () => {
     winner,
     blackDamCounter,
     whiteDamCounter,
+    whiteTurn,
+    keepGoing,
+    eenmaligeCount,
     $reset,
   };
 });
