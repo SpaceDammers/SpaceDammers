@@ -31,8 +31,6 @@ export const useBordStore = defineStore("bord", () => {
 
   const whiteTurn= ref(true);
   const eenmaligeCount = ref(0);
-  // const whiteTurnLetter=ref("");
-  // const whiteTurnLetterKing=ref("");
   const keepGoing= ref(true);
 
   function $reset() {
@@ -62,6 +60,10 @@ export const useBordStore = defineStore("bord", () => {
 
     redIsOnTheBoard.value = false;
     winner.value = "";
+
+    whiteTurn.value = true;
+    eenmaligeCount.value = 0;
+    keepGoing.value = true;
   }
   return {
     checkerPieces,
