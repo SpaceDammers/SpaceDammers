@@ -16,14 +16,13 @@
 </template>
 <script>
   import Square from "../../atoms/SquareComponent/Square.vue";
-  import CheckerPiece from "../../atoms/CheckerPiece/CheckerPiece.vue";
   import { useBordStore } from "../../../stores/bord";
   import io from "socket.io-client";
-  const socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT || "http://localhost:4000");
+  const socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT);
 
   export default {
     name: "BordComponent",
-    components: { Square, CheckerPiece },
+    components: { Square },
     setup() {
       const bord = useBordStore();
       return { bord };

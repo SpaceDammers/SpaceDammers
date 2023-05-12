@@ -6,9 +6,8 @@ import { useBordStore } from "../../../stores/bord";
 import io from "socket.io-client";
 
 // Get socket url from .env file
-const socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT || "http://localhost:4000");
+const socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT);
 
-// const socket = io("http://localhost:4000");
 export default {
   name: "CheckerPiece",
   props: ["squareContent"],
