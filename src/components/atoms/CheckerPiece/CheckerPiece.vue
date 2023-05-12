@@ -562,6 +562,7 @@ export default {
        * daarna zetten we nog @var oud wat de oude damsteen positie is leeg.
        * dan als laast onderaan deze functie wordt je door gestuurd naar de @function changePieceToDam en dit kijkt dan vervolgens of zwart boven aan het bord is of wit onderaan het bord.
       */
+     console.log("movePiece" + this.bord.keepGoing)
       this.smackKing(oud, this.bord.selectedPiece);
       this.smackThePiece(oud, this.bord.selectedPiece);
       this.bord.youMaySmack = false;
@@ -583,7 +584,9 @@ export default {
       this.bord.checkerPieces[indexRow][indexCol] = this.bord.oldLetter;
       this.bord.redIsOnTheBoard = false;
       this.changePieceToDam(indexRow, indexCol);
+      if(this.bord.keepGoing){
       this.reapeatPosibileHitMoves(indexRow, indexCol, this.bord.checkerPieces[indexRow][indexCol]);
+      }
       if (this.bord.checkerPieces[indexRow][indexCol] == "b" && !this.bord.keepGoing || this.bord.checkerPieces[indexRow][indexCol] == "db" && !this.bord.keepGoing) {
         this.changeWhiteTurn();
         console.log("WHITE IS")
