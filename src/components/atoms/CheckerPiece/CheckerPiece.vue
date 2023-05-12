@@ -548,6 +548,7 @@
         this.bord.checkerPieces[indexRow][indexCol] = this.bord.oldLetter;
         this.bord.redIsOnTheBoard = false;
         this.changePieceToDam(indexRow, indexCol);
+        this.reapeatPosibileHitMoves(indexRow, indexCol, this.bord.checkerPieces[indexRow][indexCol]);
         this.sendBoardToServer();
       },
       smackKing(oldPosition, newPosition) {
@@ -655,7 +656,12 @@
        */
         let middlePosition = null
         let newPositionRow = parseInt(newPosition.charAt(0));
-        let newPositionCol = parseInt(newPosition.charAt(0));
+        let newPositionCol = parseInt(newPosition.charAt(1));
+
+        let oldPositionRow = parseInt(oldPosition.charAt(0));
+        let oldPositionCol = parseInt(oldPosition.charAt(1));
+        let colorNewPosition = this.bord.checkerPieces[oldPositionRow][oldPositionCol];
+        // console.log(colorNewPosition);
         if (this.bord.youMaySmack) {
           let calculate = oldPosition - newPosition;
           if (calculate == 18) { // hij berekent het aan de hand van bv old = 45, nieuw = 27 er tussen is dan 36. old-nieuw= 18 of 22 dan de helft is midden
@@ -722,6 +728,166 @@
           this.sendBoardToServer();
         }
       },
+      reapeatPosibileHitMoves(indexRow, indexCol, color){
+        console.log(indexRow, indexCol, color);
+
+        this.bord.selectedPiece = "" + indexRow + indexCol;
+        this.bord.oldLetter = this.bord.checkerPieces[indexRow][indexCol];
+        let checkLetter = "";
+        let checkLetterKing = "";
+
+        if (color == "b") {
+          this.posibleRight = (this.bord.selectedPiece - 9).toString();
+          this.posibleLeft = (this.bord.selectedPiece - 11).toString();
+          this.posibleRightHit = (this.bord.selectedPiece - 18).toString();
+          this.posibleLeftHit = (this.bord.selectedPiece - 22).toString();
+          checkLetter = "w";
+          checkLetterKing = "dw";
+          this.posibleBackRight = Math.abs(-this.bord.selectedPiece - 9).toString();
+          this.posibleBackLeft = Math.abs(-this.bord.selectedPiece - 11).toString();
+          this.posibleBackRightHit = Math.abs(-this.bord.selectedPiece - 18).toString();
+          this.posibleBackLeftHit = Math.abs(-this.bord.selectedPiece - 22).toString();
+          this.sendBoardToServer();
+        } else if (color == "w") {
+          this.posibleLeft = Math.abs(-this.bord.selectedPiece - 9).toString();
+          this.posibleRight = Math.abs(-this.bord.selectedPiece - 11).toString();
+          this.posibleLeftHit = Math.abs(-this.bord.selectedPiece - 18).toString();
+          this.posibleRightHit = Math.abs(-this.bord.selectedPiece - 22).toString();
+          checkLetter = "b";
+          checkLetterKing = "db";
+          this.posibleBackRight = (this.bord.selectedPiece - 9).toString();
+          this.posibleBackLeft = (this.bord.selectedPiece - 11).toString();
+          this.posibleBackRightHit = (this.bord.selectedPiece - 18).toString();
+          this.posibleBackLeftHit = (this.bord.selectedPiece - 22).toString();
+          this.sendBoardToServer();
+        }
+
+        let leftDigit1 = parseInt(this.posibleLeft.charAt(0)); //dit is voor zwart
+        let leftDigit2 = parseInt(this.posibleLeft.charAt(1));
+        let rightDigit1 = parseInt(this.posibleRight.charAt(0));
+        let rightDigit2 = parseInt(this.posibleRight.charAt(1));
+
+        let hitRight1 = parseInt(this.posibleRightHit.charAt(0));
+        let hitRight2 = parseInt(this.posibleRightHit.charAt(1));
+        let hitLeft1 = parseInt(this.posibleLeftHit.charAt(0));
+        let hitLeft2 = parseInt(this.posibleLeftHit.charAt(1));
+
+
+        let leftDigit1Back = parseInt(this.posibleBackLeft.charAt(0));
+        let leftDigit2Back = parseInt(this.posibleBackLeft.charAt(1));
+        let rightDigit1Back = parseInt(this.posibleBackRight.charAt(0));
+        let rightDigit2Back = parseInt(this.posibleBackRight.charAt(1));
+
+        let hitRight1Back = parseInt(this.posibleBackRightHit.charAt(0));
+        let hitRight2Back = parseInt(this.posibleBackRightHit.charAt(1));
+        let hitLeft1Back = parseInt(this.posibleBackLeftHit.charAt(0));
+        let hitLeft2Back = parseInt(this.posibleBackLeftHit.charAt(1));
+
+        if (this.posibleRight < 9) {
+          console.log("We zijn aan het einde van het bord Rechts")
+          rightDigit2 = rightDigit1
+          rightDigit1 = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleLeft < 9) {
+          console.log("We zijn aan het einde van het bord Links")
+          leftDigit2 = leftDigit1
+          leftDigit1 = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleRightHit < 9) {
+          console.log("We zijn aan het einde van het bord SLAAN Rechts")
+          hitRight2 = hitRight1
+          hitRight1 = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleLeftHit < 9) {
+          console.log("We zijn aan het einde van het bord SLAAN LInks")
+          hitLeft2 = hitLeft1
+          hitLeft1 = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackRight < 9) {
+          console.log("We zijn aan het einde van het bord Rechts")
+          rightDigit2Back = rightDigit1Back
+          rightDigit1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackLeft < 9) {
+          console.log("We zijn aan het einde van het bord Links")
+          leftDigit2Back = leftDigit1Back
+          leftDigit1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackRightHit < 9) {
+          console.log("We zijn aan het einde van het bord SLAAN Rechts")
+          hitRight2Back = hitRight1Back
+          hitRight1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackLeftHit < 9) {
+          console.log("We zijn aan het einde van het bord SLAAN LInks")
+          hitLeft2Back = hitLeft1Back
+          hitLeft1Back = 0
+          this.sendBoardToServer();
+        }
+
+        if (this.posibleBackRight > 99) {
+          console.log("posibleBackRight valt buiten bord")
+          rightDigit2Back = 0
+          rightDigit1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackLeft > 99) {
+          console.log("valt buiten bord")
+          leftDigit2Back = 0
+          leftDigit1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackRightHit > 99) {
+          console.log("valt buiten bord")
+          hitRight2Back = 0
+          hitRight1Back = 0
+          this.sendBoardToServer();
+        }
+        if (this.posibleBackLeftHit > 99) {
+          console.log("posibleBackLeftHit valt buiten bord")
+          hitLeft2Back = 0
+          hitLeft1Back = 0
+          this.sendBoardToServer();
+        }
+       
+          if (this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetter && this.bord.checkerPieces[hitRight1][hitRight2] == " " || this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetterKing && this.bord.checkerPieces[hitRight1][hitRight2] == " ") {
+            this.bord.checkerPieces[hitRight1][hitRight2] = "rood"
+            this.bord.youMaySmack = true;
+            this.bord.redIsOnTheBoard = true;
+            this.sendBoardToServer();
+          }
+
+          if (this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetter && this.bord.checkerPieces[hitLeft1][hitLeft2] == " " || this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetterKing && this.bord.checkerPieces[hitLeft1][hitLeft2] == " ") {
+            this.bord.checkerPieces[hitLeft1][hitLeft2] = "rood"
+            this.bord.youMaySmack = true;
+            this.bord.redIsOnTheBoard = true;
+            this.sendBoardToServer();
+          }
+
+          if (this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetter && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " " || this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " ") {
+            //acher slaan
+            this.bord.checkerPieces[hitRight1Back][hitRight2Back] = "rood"
+            this.bord.youMaySmack = true;
+            this.bord.redIsOnTheBoard = true;
+            this.sendBoardToServer();
+          }
+
+          if (this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetter && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " " || this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " ") {
+            //acher slaan
+            this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] = "rood"
+            this.bord.youMaySmack = true;
+            this.bord.redIsOnTheBoard = true;
+            this.sendBoardToServer();
+          }
+
+      },
       changePieceToDam(indexRow, indexCol) {
         /**
         * kijkt nadat @function movePiece hem aanroept of de normalen damsteen al aan het einden van het bord is. 
@@ -762,6 +928,15 @@
           }
         }
       },
+      // changeBlackTurn() {
+      //   //hier wordt gekeken wie er aan de burt is (alleen doet dit natuurlijk nu nog niks maar zo kan het er uit zien)
+      //   this.whiteTurn = false;
+      //   return this.whiteTurn;
+      // },
+      // changeWhiteTurn() {
+      //   this.whiteTurn = true;
+      //   return this.whiteTurn;
+      // },
     }
   };
 </script>
