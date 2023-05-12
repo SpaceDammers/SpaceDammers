@@ -26,6 +26,7 @@
 
         old: "",
 
+        eenmaligeCount: 0,
       };
     },
     created() {
@@ -59,43 +60,74 @@
         }
       },
       select(indexRow, indexCol) {
-        /**
-         * Kijkt eerst of @param this.bord.redIsOnTheBoard is true.
-         * mocht dit zo zijn dan ga je meteen door naar de @function colorCheckerPiece() functie
-         * is dit niet het geval dan mag je een steen aanklikken en dan krijgt die de groene css op die steen.
-        */
-       if(this.bord.checkerPieces[indexRow][indexCol] == "db" || this.bord.checkerPieces[indexRow][indexCol] == "dw"){
-        if (this.bord.redIsOnTheBoard) {
-          this.colorCheckerPiece(indexRow, indexCol);
-          this.sendBoardToServer();
+      /**
+       * Kijkt eerst of @param this.bord.redIsOnTheBoard is true.
+       * mocht dit zo zijn dan ga je meteen door naar de @function colorCheckerPiece() functie
+       * is dit niet het geval dan mag je een steen aanklikken en dan krijgt die de groene css op die steen.
+      */
+        if (this.bord.checkerPieces[indexRow][indexCol] == "db" || this.bord.checkerPieces[indexRow][indexCol] == "dw") {
+          if (this.bord.redIsOnTheBoard) {
+            this.colorCheckerPiece(indexRow, indexCol);
+            this.sendBoardToServer();
+          } else {
+            console.log("weet niet meer wat plan was send help") //hier moet iets
+
+            var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groen heeft gekregen
+            for (var i = 0; i < oldActive.length; i++) {
+              oldActive[i].classList.remove("groenRocket");
+            }
+            if (this.squareContent.letter != " ") {
+              event.target.classList.add("groenRocket");
+            }
+            this.colorCheckerPiece(indexRow, indexCol);
+            this.sendBoardToServer();
+          }
+
         } else {
-          var oldActive = document.getElementsByClassName("groenRocket"); // kijkt naar de olde die de class groen heeft gekregen
-          for (var i = 0; i < oldActive.length; i++) {
-            oldActive[i].classList.remove("groenRocket");
-          }
-          if (this.squareContent.letter != " ") {
-            event.target.classList.add("groenRocket");
-          }
-          this.colorCheckerPiece(indexRow, indexCol);
-          this.sendBoardToServer();
+
+          if (this.bord.redIsOnTheBoard) {
+            this.colorCheckerPiece(indexRow, indexCol);
+            this.sendBoardToServer();
+          } else {
+            // if (this.bord.eenmaligeCount == 0) { //eerste ronde
+            //   var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
+            //   for (var i = 0; i < oldActive.length; i++) {
+            //     oldActive[i].classList.remove("groen");
+            //   }
+            //     if (this.squareContent.letter != " ") {
+            //       event.target.classList.add("groen");
+            //     }
+            //     this.colorCheckerPiece(indexRow, indexCol);
+            //     this.sendBoardToServer();
+            //     this.bord.eenmaligeCount = this.bord.eenmaligeCount + 1;
+            //   }
+              // if (this.bord.eenmaligeCount >= 1) {
+                console.log("kiekeboe")
+                if (this.bord.whiteTurn && this.bord.checkerPieces[indexRow][indexCol] == "w") {
+                  var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
+                  for (var i = 0; i < oldActive.length; i++) {
+                    oldActive[i].classList.remove("groen");
+                  }
+                  if (this.squareContent.letter != " ") {
+                    event.target.classList.add("groen");
+                  }
+                  this.colorCheckerPiece(indexRow, indexCol);
+                  this.sendBoardToServer();
+                }
+                if (!this.bord.whiteTurn && this.bord.checkerPieces[indexRow][indexCol] == "b") {
+                  var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
+                  for (var i = 0; i < oldActive.length; i++) {
+                    oldActive[i].classList.remove("groen");
+                  }
+                  if (this.squareContent.letter != " ") {
+                    event.target.classList.add("groen");
+                  }
+                  this.colorCheckerPiece(indexRow, indexCol);
+                  this.sendBoardToServer();
+                }
+              }
+          // }
         }
-       }else{
-        
-        if (this.bord.redIsOnTheBoard) {
-          this.colorCheckerPiece(indexRow, indexCol);
-          this.sendBoardToServer();
-        } else {
-          var oldActive = document.getElementsByClassName("groen"); // kijkt naar de olde die de class groen heeft gekregen
-          for (var i = 0; i < oldActive.length; i++) {
-            oldActive[i].classList.remove("groen");
-          }
-          if (this.squareContent.letter != " ") {
-            event.target.classList.add("groen");
-          }
-          this.colorCheckerPiece(indexRow, indexCol);
-          this.sendBoardToServer();
-        }
-      }
       },
       colorCheckerPiece(indexRow, indexCol) {
         /**
@@ -306,11 +338,14 @@
           if (this.bord.checkerPieces[leftDigit1][leftDigit2] == " ") {
             this.bord.checkerPieces[leftDigit1][leftDigit2] = "rood"; //links kan
             this.bord.redIsOnTheBoard = true;
+            this.bord.keepGoing = false;
             this.sendBoardToServer();
           }
           if (this.bord.checkerPieces[rightDigit1][rightDigit2] == " ") {
             this.bord.checkerPieces[rightDigit1][rightDigit2] = "rood"; //rechts kan
             this.bord.redIsOnTheBoard = true;
+            this.bord.keepGoing = false;
+
             this.sendBoardToServer();
           }
         }
@@ -734,10 +769,13 @@
           }
         } else {
           // console.log("NO SMACKING")
+          this.bord.keepGoing = false;
           this.sendBoardToServer();
         }
       },
       reapeatPosibileHitMoves(indexRow, indexCol, color){
+        // this.bord.keepGoing = true;
+
         console.log(indexRow, indexCol, color);
 
         this.bord.selectedPiece = "" + indexRow + indexCol;
@@ -1142,7 +1180,6 @@
           this.sendBoardToServer();
         }
       },
-
       winnerCounter(color) {
         /**
          * krijgt van @function smackThePiece de letter die de andere letter heeft gesmackt
@@ -1167,10 +1204,12 @@
       changeBlackTurn() {
         //hier wordt gekeken wie er aan de burt is (alleen doet dit natuurlijk nu nog niks maar zo kan het er uit zien)
         this.bord.whiteTurn = false;
+        console.log("changeBlackTurn " + this.bord.whiteTurn);
         return this.bord.whiteTurn;
       },
       changeWhiteTurn() {
-        this.whiteTurn = true;
+        this.bord.whiteTurn = true;
+        console.log("changeWHITETurn " + this.bord.whiteTurn);
         return this.bord.whiteTurn;
       },
     }

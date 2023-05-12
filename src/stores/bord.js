@@ -3,18 +3,18 @@ import { defineStore } from "pinia";
 
 export const useBordStore = defineStore("bord", () => {
   const checkerPieces = ref([
-    ["x", " ", "x", "w", "x", "w", "x", "w", "x", "w"],
+    ["x", "w", "x", "w", "x", "w", "x", "w", "x", "w"],
     ["w", "x", "w", "x", "w", "x", "w", "x", "w", "x"],
-    ["x", "w", "x", " ", "x", "w", "x", "w", "x", "w"],
-    ["w", "x", "w", "x", "w", "x", "w", "x", "dw", "x"],
+    ["x", "w", "x", "w", "x", "w", "x", "w", "x", "w"],
+    ["w", "x", "w", "x", "w", "x", "w", "x", "w", "x"],
 
-    ["x", " ", "x", " ", "x", " ", "x", "b", "x", " "], //test of " lege werkt" empty kan
+    ["x", " ", "x", " ", "x", " ", "x", " ", "x", " "], //test of " lege werkt" empty kan
     [" ", "x", " ", "x", " ", "x", " ", "x", " ", "x"],
 
     ["x", "b", "x", "b", "x", "b", "x", "b", "x", "b"],
-    ["b", "x", "b", "x", " ", "x", "b", "x", "b", "x"],
+    ["b", "x", "b", "x", "b", "x", "b", "x", "b", "x"],
     ["x", "b", "x", "b", "x", "b", "x", "b", "x", "b"],
-    ["b", "x", " ", "x", "b", "x", "b", "x", "b", "x"],
+    ["b", "x", "b", "x", "b", "x", "b", "x", "b", "x"],
   ]);
 
   const selectedPiece = ref("");
@@ -30,6 +30,9 @@ export const useBordStore = defineStore("bord", () => {
   const winner = ref("");
 
   const whiteTurn= ref(true);
+  const eenmaligeCount = ref(0);
+  // const whiteTurnLetter=ref("");
+  // const whiteTurnLetterKing=ref("");
   const keepGoing= ref(true);
 
   function $reset() {
@@ -73,6 +76,7 @@ export const useBordStore = defineStore("bord", () => {
     whiteDamCounter,
     whiteTurn,
     keepGoing,
+    eenmaligeCount,
     $reset,
   };
 });
