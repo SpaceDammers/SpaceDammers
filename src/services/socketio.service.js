@@ -19,7 +19,7 @@ export default class SocketioService {
 
   // Setup socket connection
   setupSocketConnection(token) {
-    this.socket = io("http://localhost:4000", {
+    this.socket = io(import.meta.env.VUE_APP_SOCKET_ENDPOINT || "http://localhost:4000", {
       auth: {
         token,
       },
