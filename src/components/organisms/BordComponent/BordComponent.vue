@@ -19,7 +19,7 @@
   import CheckerPiece from "../../atoms/CheckerPiece/CheckerPiece.vue";
   import { useBordStore } from "../../../stores/bord";
   import io from "socket.io-client";
-  const socket = io(process.env.VUE_APP_SOCKET_URL || "http://localhost:4000");
+  const socket = io(process.env.VUE_APP_SOCKET_ENDPOINT || "http://localhost:4000");
 
   export default {
     name: "BordComponent",
