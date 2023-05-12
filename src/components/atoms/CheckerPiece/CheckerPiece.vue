@@ -549,6 +549,15 @@
         this.bord.redIsOnTheBoard = false;
         this.changePieceToDam(indexRow, indexCol);
         this.reapeatPosibileHitMoves(indexRow, indexCol, this.bord.checkerPieces[indexRow][indexCol]);
+        if (this.bord.checkerPieces[indexRow][indexCol] == "b" && !this.bord.keepGoing || this.bord.checkerPieces[indexRow][indexCol] == "db" && !this.bord.keepGoing){
+          this.changeWhiteTurn();
+          console.log("WHITE IS")
+        }
+        if (this.bord.checkerPieces[indexRow][indexCol] == "w" && !this.bord.keepGoing || this.bord.checkerPieces[indexRow][indexCol] == "dw" && !this.bord.keepGoing ){
+          this.changeBlackTurn();
+          console.log("ZWART IS")
+
+        }
         this.sendBoardToServer();
       },
       smackKing(oldPosition, newPosition) {
@@ -857,40 +866,51 @@
           this.sendBoardToServer();
         }
 
-        if(color == "dw" || color == "db"){
+        if(this.bord.checkerPieces[rightDigit1][rightDigit2] == "b" || this.bord.checkerPieces[rightDigit1][rightDigit2] == "w"){
+          if (this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetter && this.bord.checkerPieces[hitRight1][hitRight2] == " " ||
+            this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetter && this.bord.checkerPieces[hitLeft1][hitLeft2] == " " ||
+            this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetter && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " " ||
+            this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetter && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " " ||
 
-        }
-       
-          if (this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetter && this.bord.checkerPieces[hitRight1][hitRight2] == " " || this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetterKing && this.bord.checkerPieces[hitRight1][hitRight2] == " ") {
-            this.bord.checkerPieces[hitRight1][hitRight2] = "rood"
-            this.bord.youMaySmack = true;
-            this.bord.redIsOnTheBoard = true;
-            this.sendBoardToServer();
+            this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetterKing && this.bord.checkerPieces[hitRight1][hitRight2] == " " ||
+            this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetterKing && this.bord.checkerPieces[hitLeft1][hitLeft2] == " " ||
+            this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " " ||
+            this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " "
+          ){       
+            if (this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetter && this.bord.checkerPieces[hitRight1][hitRight2] == " " || this.bord.checkerPieces[rightDigit1][rightDigit2] == checkLetterKing && this.bord.checkerPieces[hitRight1][hitRight2] == " ") {
+              this.bord.checkerPieces[hitRight1][hitRight2] = "rood"
+              this.bord.youMaySmack = true;
+              this.bord.redIsOnTheBoard = true;
+              this.sendBoardToServer();
+            }
+
+            if (this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetter && this.bord.checkerPieces[hitLeft1][hitLeft2] == " " || this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetterKing && this.bord.checkerPieces[hitLeft1][hitLeft2] == " ") {
+              this.bord.checkerPieces[hitLeft1][hitLeft2] = "rood"
+              this.bord.youMaySmack = true;
+              this.bord.redIsOnTheBoard = true;
+              this.sendBoardToServer();
+            }
+
+            if (this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetter && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " " || this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " ") {
+              //acher slaan
+              this.bord.checkerPieces[hitRight1Back][hitRight2Back] = "rood"
+              this.bord.youMaySmack = true;
+              this.bord.redIsOnTheBoard = true;
+              this.sendBoardToServer();
+            }
+
+            if (this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetter && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " " || this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " ") {
+              //acher slaan
+              this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] = "rood"
+              this.bord.youMaySmack = true;
+              this.bord.redIsOnTheBoard = true;
+              this.sendBoardToServer();
+            }
+          }else{
+            console.log("STOOOOP")
+            this.bord.keepGoing = false;
           }
-
-          if (this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetter && this.bord.checkerPieces[hitLeft1][hitLeft2] == " " || this.bord.checkerPieces[leftDigit1][leftDigit2] == checkLetterKing && this.bord.checkerPieces[hitLeft1][hitLeft2] == " ") {
-            this.bord.checkerPieces[hitLeft1][hitLeft2] = "rood"
-            this.bord.youMaySmack = true;
-            this.bord.redIsOnTheBoard = true;
-            this.sendBoardToServer();
-          }
-
-          if (this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetter && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " " || this.bord.checkerPieces[rightDigit1Back][rightDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitRight1Back][hitRight2Back] == " ") {
-            //acher slaan
-            this.bord.checkerPieces[hitRight1Back][hitRight2Back] = "rood"
-            this.bord.youMaySmack = true;
-            this.bord.redIsOnTheBoard = true;
-            this.sendBoardToServer();
-          }
-
-          if (this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetter && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " " || this.bord.checkerPieces[leftDigit1Back][leftDigit2Back] == checkLetterKing && this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] == " ") {
-            //acher slaan
-            this.bord.checkerPieces[hitLeft1Back][hitLeft2Back] = "rood"
-            this.bord.youMaySmack = true;
-            this.bord.redIsOnTheBoard = true;
-            this.sendBoardToServer();
-          }
-
+        }else{
 
           // ---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -900,6 +920,7 @@
         this.bord.oldLetter = this.bord.checkerPieces[indexRow][indexCol];
         let checkLetter1 = "";
         let checkLetter2 = "";
+        let keepGoingCounter = 0; //als deze 4 is dan kan je niet meer dus moet je  stoppen keepgoing moet false
 
         if (color == "db") {
           checkLetter1 = "w"; //zo weet die over welke stenen die wel mag slaan
@@ -922,6 +943,7 @@
             if (this.bord.checkerPieces[left1][left2] == " ") {
               // this.bord.checkerPieces[left1][left2] = "rood";
               // this.bord.redIsOnTheBoard = true;
+              keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
               if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
@@ -961,6 +983,7 @@
             if (this.bord.checkerPieces[left1][left2] == " ") {
               // this.bord.checkerPieces[left1][left2] = "rood";
               // this.bord.redIsOnTheBoard = true;
+              keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
               if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
@@ -1007,6 +1030,7 @@
             if (this.bord.checkerPieces[left1][left2] == " ") {
               // this.bord.checkerPieces[left1][left2] = "rood";
               // this.bord.redIsOnTheBoard = true;
+              keepGoingCounter++;
               if (this.posibleLeft <= 11) {
                 i = 10;
               }
@@ -1062,6 +1086,7 @@
             if (this.bord.checkerPieces[left1][left2] == " ") {
               // this.bord.checkerPieces[left1][left2] = "rood";
               // this.bord.redIsOnTheBoard = true;
+              keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
               if (ThereHasBeenAHit) { //kijken of er al geslagen is want dan mag je niet door. anders ga je door
@@ -1094,7 +1119,10 @@
             }
           }
         }
-
+        if(keepGoingCounter == 4 && !this.bord.youMaySmack){
+          this.bord.keepGoing = false;
+        }
+      }
       },
       changePieceToDam(indexRow, indexCol) {
         /**
@@ -1136,15 +1164,15 @@
           }
         }
       },
-      // changeBlackTurn() {
-      //   //hier wordt gekeken wie er aan de burt is (alleen doet dit natuurlijk nu nog niks maar zo kan het er uit zien)
-      //   this.whiteTurn = false;
-      //   return this.whiteTurn;
-      // },
-      // changeWhiteTurn() {
-      //   this.whiteTurn = true;
-      //   return this.whiteTurn;
-      // },
+      changeBlackTurn() {
+        //hier wordt gekeken wie er aan de burt is (alleen doet dit natuurlijk nu nog niks maar zo kan het er uit zien)
+        this.bord.whiteTurn = false;
+        return this.bord.whiteTurn;
+      },
+      changeWhiteTurn() {
+        this.whiteTurn = true;
+        return this.bord.whiteTurn;
+      },
     }
   };
 </script>

@@ -30,6 +30,7 @@ export const useBordStore = defineStore("bord", () => {
   const winner = ref("");
 
   const whiteTurn= ref(true);
+  const keepGoing= ref(true);
 
   function $reset() {
     checkerPieces.value = [
@@ -70,6 +71,8 @@ export const useBordStore = defineStore("bord", () => {
     winner,
     blackDamCounter,
     whiteDamCounter,
+    whiteTurn,
+    keepGoing,
     $reset,
   };
 });
