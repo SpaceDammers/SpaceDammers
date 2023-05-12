@@ -349,7 +349,6 @@ export default {
         }
       }
     },
-
     posibleMovesKing(indexRow, indexCol, color) {
       this.bord.selectedPiece = "" + indexRow + indexCol;
       this.bord.oldLetter = this.bord.checkerPieces[indexRow][indexCol];
@@ -393,6 +392,7 @@ export default {
                   this.bord.checkerPieces[left1][left2] = "rood";
                   this.bord.redIsOnTheBoard = true;
                   this.bord.youMaySmackKing = true;
+                  this.bord.keepGoing = true;
                   ThereHasBeenAHit = true;
                 } else { // er is al geslagen dus stop het.
                   i = 10;
@@ -433,6 +433,7 @@ export default {
                   this.bord.redIsOnTheBoard = true;
                   ThereHasBeenAHit = true;
                   this.bord.youMaySmackKing = true;
+                  this.bord.keepGoing = true;
                 } else { // er is al geslagen dus stop het.
                   i = 10;
                 }
@@ -488,6 +489,8 @@ export default {
                   this.bord.redIsOnTheBoard = true;
                   this.bord.youMaySmackKing = true;
                   ThereHasBeenAHit = true;
+                  this.bord.keepGoing = true;
+
                 } else { // er is al geslagen dus stop het.
                   i = 10;
                 }
@@ -539,6 +542,8 @@ export default {
                   this.bord.redIsOnTheBoard = true;
                   this.bord.youMaySmackKing = true;
                   ThereHasBeenAHit = true;
+                  this.bord.keepGoing = true;
+
                 } else { // er is al geslagen dus stop het.
                   i = 10;
                 }
@@ -562,8 +567,14 @@ export default {
        * dan als laast onderaan deze functie wordt je door gestuurd naar de @function changePieceToDam en dit kijkt dan vervolgens of zwart boven aan het bord is of wit onderaan het bord.
       */
      console.log("movePiece" + this.bord.keepGoing)
-      this.smackKing(oud, this.bord.selectedPiece);
+     oud = oud.toString();
+        let oud1 = parseInt(oud.charAt(0));
+        let oud2 = parseInt(oud.charAt(1));
+     if(this.bord.checkerPieces[oud1][oud2] == "b" || this.bord.checkerPieces[oud1][oud2] == "w"){
       this.smackThePiece(oud, this.bord.selectedPiece);
+     }else{
+      this.smackKing(oud, this.bord.selectedPiece);
+     }
       this.bord.youMaySmack = false;
       this.bord.youMaySmackKing = false;
       if (this.bord.checkerPieces[indexRow][indexCol] == "rood") {
@@ -575,9 +586,9 @@ export default {
             }
           }
         }
-        oud = oud.toString();
-        let oud1 = parseInt(oud.charAt(0));
-        let oud2 = parseInt(oud.charAt(1));
+        // oud = oud.toString();
+        // let oud1 = parseInt(oud.charAt(0));
+        // let oud2 = parseInt(oud.charAt(1));
         this.bord.checkerPieces[oud1][oud2] = " ";
       }
       this.bord.checkerPieces[indexRow][indexCol] = this.bord.oldLetter;
@@ -956,8 +967,6 @@ export default {
             let left1 = parseInt(this.posibleLeft.charAt(0));
             let left2 = parseInt(this.posibleLeft.charAt(1));
             if (this.bord.checkerPieces[left1][left2] == " ") {
-              // this.bord.checkerPieces[left1][left2] = "rood";
-              // this.bord.redIsOnTheBoard = true;
               keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
@@ -996,8 +1005,6 @@ export default {
             let left1 = parseInt(this.posibleLeft.charAt(0));
             let left2 = parseInt(this.posibleLeft.charAt(1));
             if (this.bord.checkerPieces[left1][left2] == " ") {
-              // this.bord.checkerPieces[left1][left2] = "rood";
-              // this.bord.redIsOnTheBoard = true;
               keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
@@ -1043,8 +1050,6 @@ export default {
               left2 = parseInt(this.posibleLeft.charAt(1));
             }
             if (this.bord.checkerPieces[left1][left2] == " ") {
-              // this.bord.checkerPieces[left1][left2] = "rood";
-              // this.bord.redIsOnTheBoard = true;
               keepGoingCounter++;
               if (this.posibleLeft <= 11) {
                 i = 10;
@@ -1099,8 +1104,6 @@ export default {
               left2 = parseInt(this.posibleLeft.charAt(1));
             }
             if (this.bord.checkerPieces[left1][left2] == " ") {
-              // this.bord.checkerPieces[left1][left2] = "rood";
-              // this.bord.redIsOnTheBoard = true;
               keepGoingCounter++;
             } else if (this.bord.checkerPieces[left1][left2] == checkLetter1 || this.bord.checkerPieces[left1][left2] == checkLetter2) {
               //hier loop je tegen een tegenstander
@@ -1135,6 +1138,8 @@ export default {
           }
         }
         if (keepGoingCounter == 4 && !this.bord.youMaySmack) {
+          // this.bord.youMaySmack = false dit doet niks
+          // this.bord.youMaySmackKing = false
           this.bord.keepGoing = false;
         }
       }

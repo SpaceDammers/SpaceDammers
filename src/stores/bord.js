@@ -9,7 +9,7 @@ export const useBordStore = defineStore("bord", () => {
     ["w", "x", "w", "x", "w", "x", "dw", "x", "w", "x"],
 
     ["x", " ", "x", " ", "x", " ", "x", " ", "x", " "], //test of " lege werkt" empty kan
-    [" ", "x", " ", "x", " ", "x", " ", "x", " ", "x"],
+    [" ", "x", " ", "x", " ", "x", "w", "x", " ", "x"],
 
     ["x", "b", "x", " ", "x", " ", "x", " ", "x", " "],
     ["b", "x", "b", "x", "db", "x", "b", "x", "b", "x"],
