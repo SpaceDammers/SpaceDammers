@@ -19,7 +19,7 @@ export default class SocketioService {
 
   // Setup socket connection
   setupSocketConnection(token) {
-    this.socket = io(import.meta.env.VITE_APP_SOCKET_ENDPOINT, {
+    this.socket = io( `${import.meta.env.VITE_APP_SOCKET_ENDPOINT}`, {
       auth: {
         token,
       },
@@ -29,6 +29,7 @@ export default class SocketioService {
     // If connection failed or timed out
     this.socket.on("connect_error", (err) => {  
       console.log(`Connection failed: ${err.message}`);
+      console.info("Using the following socket endpoint:", import.meta.env.VITE_APP_SOCKET_ENDPOINT || "localhost:4000")
     });
 
     // If connected successfully
