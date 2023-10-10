@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /register
+Disallow: /login
+Disallow: /logout
+Disallow: /game
+Disallow: /test
+Disallow: /start
+Disallow: /about
+Allow: /
+
+sitemap: http://www.example.com/sitemap.xml
